@@ -8,7 +8,7 @@ var username = document.getElementById("username").value;
 var password = document.getElementById("password").value;
 
 if ( username == "facerek" && password == "1234"){
-	location.href = 'image-classify.html';
+	location.href = 'https://project5.onrender.com/image-classify.html';
 	return true;
 }
 else{
