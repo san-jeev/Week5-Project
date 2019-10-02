@@ -7,7 +7,7 @@ var password = document.getElementById("password").value;
 
 if (username == "facerek" && password == "1234"){
 	window.location.assign('https://project5.onrender.com/image-classify.html');
-	alert ("Login successfully");
+	alert (window.location);
 	return false;
 }
 else{
