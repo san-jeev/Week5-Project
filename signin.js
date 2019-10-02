@@ -6,10 +6,8 @@ var username = document.getElementById("username").value;
 var password = document.getElementById("password").value;
 
 if (username == "facerek" && password == "1234"){
-//	window.location.assign('./image-classify.html');
 	setTimeout(function(){document.location.href = "https://project5.onrender.com/image-classify.html"},500);
-//	window.location.assign('https://project5.onrender.com/image-classify.html');
-	alert (window.location.href);
+	alert ("Login successfully");
 	return false;
 }
 else{
