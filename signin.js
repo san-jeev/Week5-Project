@@ -6,12 +6,14 @@ var username = document.getElementById("username").value;
 var password = document.getElementById("password").value;
 
 if (username == "facerek" && password == "1234"){
+	window.location.assign('https://project5.onrender.com/image-classify.html');
+        alert("window.location.assign done");	
 	document.location.assign('https://project5.onrender.com/image-classify.html');
-        alert("location.assign done");	
+        alert("document.location.assign done");	
 	document.location.replace('https://project5.onrender.com/image-classify.html');
-        alert("location.replace done");
+        alert("document.location.replace done");
 	document.location.href('https://project5.onrender.com/image-classify.html');
-        alert("location.href done");
+        alert("document.location.href done");
 	alert ("Login successfully");
         alert("In Validate signin.js now going returning");
 	return false;
