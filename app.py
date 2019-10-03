@@ -44,7 +44,7 @@ def login():
             return json.dumps({'status': 'Both fields required'})
         return render_template('login.html', form=form)
     user = helpers.get_user()
-    return render_template('home.html', user=user)
+    return render_template('home.html', user=user, content=render_template('pages/dashboard.html'))
 
 
 @app.route("/logout")
@@ -176,6 +176,35 @@ def gen():
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('tmp/webcam_last_image.jpg', 'rb').read() + b'\r\n')
 
+
+# -------- Routing ---------------------------------------------------------- #
+@app.route('/status')
+def status():
+    # custommize your page title / description here
+    page_title = 'Current status'
+    page_description = 'Check the current status of the cameras'
+
+    # try to match the pages defined in -> pages/
+    return render_template('home.html',
+                            content=render_template( 'pages/status.html') )
+@app.route('/dashboard')
+def status():
+    # custommize your page title / description here
+    page_title = 'Current status'
+    page_description = 'Check the current status of the cameras'
+
+    # try to match the pages defined in -> pages/
+    return render_template('home.html',
+                            content=render_template( 'pages/dashboard.html') )
+@app.route('/addmember')
+def status():
+    # custommize your page title / description here
+    page_title = 'Current status'
+    page_description = 'Check the current status of the cameras'
+
+    # try to match the pages defined in -> pages/
+    return render_template('home.html',
+                            content=render_template( 'pages/addmember.html') )
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)

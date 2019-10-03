@@ -15,20 +15,22 @@
             General
           </p>
           <ul class="menu-list">
-            <li><a>Dashboard</a></li>
-            <li><a>Insights</a></li>
+            <li><a class="is-active" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('insights') }}">Insights</a></li>
           </ul>
           <p class="menu-label">
             Administration
           </p>
           <ul class="menu-list">
-            <li><a>Status</a></li>
-            <li><a>Team Settings</a></li>
+            <li><a href="{{ url_for('status') }}">Status</a></li>
+            <li><a href="{{ url_for('teamsettings') }}">Team Settings</a></li>
             <li>
-              <a class="is-active">Manage Your Team</a>
+              <p class="menu-label">
+                Manage your team
+              </p>
               <ul>
-                <li><a>Add a member</a></li>
-                <li><a>Remove a member</a></li>
+                <li><a href="{{ url_for('addmember') }}">Add a member</a></li>
+                <li><a href="{{ url_for('removemember') }}">Remove a member</a></li>
               </ul>
             </li>
           </ul>
@@ -36,29 +38,15 @@
             Account
           </p>
           <ul class="menu-list">
-            <li><a>Account</a></li>
-            <li><a>Transactions</a></li>
+            <li><a href="{{ url_for('account') }}">Account</a></li>
+            <li><a href="{{ url_for('transactions') }}">Transactions</a></li>
           </ul>
         </aside>
       </div>
 
       <!-- main section -->
       <div class="dashboard-main is-scrollable">
-        <section class="section">
-          <p class="title is-size-2 is-spaced">
-            Smart Camera
-          </p>
-
-          <p class="subtitle is-size-3">
-            Recognize who enters your office.
-          </p>
-
-          <hr />
-
-          <section class="content is-medium">
-            <img src="{{ url_for('video_feed') }}">
-          </section>
-        </section>
+        {{ content | safe }}
 
         <!-- the footer will take up all unused space at the bottom -->
         <footer class="footer has-background-black has-text-white">
@@ -74,5 +62,12 @@
     </div>
 {% endblock %}
 {% block scripts %}
+<script>
+  $(".menu a").click(function(){
+    $(".menu a").removeClass("is-active");
+    $(this).addClass("is-active");
+  });
+</script>
+
 <script src="../static/js/scripts.js"></script>
 {% endblock %}
