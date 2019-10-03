@@ -16,6 +16,8 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
 #Create a video instance
 video = cv2.VideoCapture(0)
 #Path to known images (companys database)
@@ -178,6 +180,23 @@ def gen():
 
 
 # -------- Routing ---------------------------------------------------------- #
+@app.route('/dashboard')
+def dashboard():
+    # custommize your page title / description here
+    page_title = 'Dashboard - Customize your cameras'
+    page_description = 'A controller for cameras'
+
+    return redirect(url_for('login'))
+
+@app.route('/insights')
+def insights():
+    # custommize your page title / description here
+    page_title = 'Dashboard - Customize your cameras'
+    page_description = 'A controller for cameras'
+
+    return render_template('home.html',
+                            content=render_template( 'pages/insights.html') )
+
 @app.route('/status')
 def status():
     # custommize your page title / description here
@@ -187,24 +206,78 @@ def status():
     # try to match the pages defined in -> pages/
     return render_template('home.html',
                             content=render_template( 'pages/status.html') )
-@app.route('/dashboard')
-def status():
-    # custommize your page title / description here
-    page_title = 'Current status'
-    page_description = 'Check the current status of the cameras'
 
-    # try to match the pages defined in -> pages/
+
+@app.route('/teamsettings')
+def teamsettings():
+    # custommize your page title / description here
+    page_title = 'Dashboard - Customize your cameras'
+    page_description = 'A controller for cameras'
+
     return render_template('home.html',
-                            content=render_template( 'pages/dashboard.html') )
-@app.route('/addmember')
-def status():
-    # custommize your page title / description here
-    page_title = 'Current status'
-    page_description = 'Check the current status of the cameras'
+                            content=render_template( 'pages/teamsettings.html') )
 
-    # try to match the pages defined in -> pages/
+
+# -------- Upload images ---------------------------------------------------- #
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/addmember', methods=['GET', 'POST'])
+def addmember():
+    # custommize your page title / description here
+    page_title = 'Add a member'
+    page_description = 'Add a new face to your camera'
+
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+
     return render_template('home.html',
                             content=render_template( 'pages/addmember.html') )
+
+
+@app.route('/removemember')
+def removemember():
+    # custommize your page title / description here
+    page_title = 'Dashboard - Customize your cameras'
+    page_description = 'A controller for cameras'
+
+    return render_template('home.html',
+                            content=render_template( 'pages/removemember.html') )
+
+@app.route('/account')
+def account():
+    # custommize your page title / description here
+    page_title = 'Dashboard - Customize your cameras'
+    page_description = 'A controller for cameras'
+
+    return render_template('home.html',
+                            content=render_template( 'pages/account.html') )
+
+@app.route('/transactions')
+def transactions():
+    # custommize your page title / description here
+    page_title = 'Dashboard - Customize your cameras'
+    page_description = 'A controller for cameras'
+
+    return render_template('home.html',
+                            content=render_template( 'pages/transactions.html') )
+
+
 # ======== Main ============================================================== #
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
