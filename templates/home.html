@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+<div class="dashboard">
+      <!-- left panel -->
+      <div class="dashboard-panel is-medium has-thick-padding has-background-grey-lighter is-hidden-mobile">
+        <div class="has-text-centered">
+          <!-- <img src="https://bulma.io/images/bulma-logo.png  " width="50%"> -->
+        </div>
+
+        <br /><br />
+
+        <aside class="menu has-text-white">
+          <p class="menu-label">
+            General
+          </p>
+          <ul class="menu-list">
+            <li><a class="is-active" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('insights') }}">Insights</a></li>
+          </ul>
+          <p class="menu-label">
+            Administration
+          </p>
+          <ul class="menu-list">
+            <li><a href="{{ url_for('status') }}">Status</a></li>
+            <li><a href="{{ url_for('teamsettings') }}">Team Settings</a></li>
+            <li>
+              <p class="menu-label">
+                Manage your team
+              </p>
+              <ul>
+                <li><a href="{{ url_for('addmember') }}">Add a member</a></li>
+                <li><a href="{{ url_for('removemember') }}">Remove a member</a></li>
+              </ul>
+            </li>
+          </ul>
+          <p class="menu-label">
+            Account
+          </p>
+          <ul class="menu-list">
+            <li><a href="{{ url_for('account') }}">Account</a></li>
+            <li><a href="{{ url_for('transactions') }}">Transactions</a></li>
+          </ul>
+        </aside>
+      </div>
+
+      <!-- main section -->
+      <div class="dashboard-main is-scrollable">
+        {{ content | safe }}
+
+        <!-- the footer will take up all unused space at the bottom -->
+        <!-- <footer class="footer has-background-black has-text-white">
+          <p class="is-size-2">
+            Footer
+          </p>
+
+          <p>
+            Notice that this entire space is filled up.
+          </p>
+        </footer> -->
+      </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script>
+  $(".menu a").click(function(){
+    $(".menu a").removeClass("is-active");
+    $(this).addClass("is-active");
+  });
+</script>
+
+<script src="../static/js/scripts.js"></script>
+{% endblock %}
