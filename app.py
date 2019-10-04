@@ -97,21 +97,16 @@ def settings():
 @app.route('/video_feed')
 def video_feed():
     """Video streaming route. Put this in the src attribute of an img tag."""
-<<<<<<< HEAD
+
     user = helpers.get_user()
     return Response(gen(user=user),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 def gen(user):
-=======
-    return Response(gen(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
-def gen():
->>>>>>> 8761708bfbf8c25b429df6af9f46fbd11f5d9703
     """Video streaming generator function."""
     known_face_encodings = []
     known_face_names = []
 
-<<<<<<< HEAD
     path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
 
     #Making encoding for known players
@@ -124,18 +119,7 @@ def gen():
 
             player_name = filename.split(".")[0]
             known_face_names.append(player_name)
-=======
-    user = helpers.get_user()
-    path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
 
-    #Making encoding for known players
-    for filename in os.listdir(path):
-        image = face_recognition.load_image_file(os.path.join(path_for_current_user, filename))
-        known_face_encodings.append(face_recognition.face_encodings(image)[0])
-
-        player_name = filename.split(".")[0]
-        known_face_names.append(player_name)
->>>>>>> 8761708bfbf8c25b429df6af9f46fbd11f5d9703
 
     # Initialize some variables
     face_locations = []
@@ -143,11 +127,9 @@ def gen():
     face_names = []
     process_this_frame = True
 
-<<<<<<< HEAD
     if len(known_face_encodings) < 1:
         return
-=======
->>>>>>> 8761708bfbf8c25b429df6af9f46fbd11f5d9703
+
     while True:
         rval, frame = video.read()
         # Resize frame of video to 1/4 size for faster face recognition processing
