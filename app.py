@@ -12,6 +12,7 @@ import face_recognition
 import cv2
 import numpy as np
 from werkzeug.utils import secure_filename
+from flask import send_from_directory
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -46,7 +47,7 @@ def login():
             return json.dumps({'status': 'Both fields required'})
         return render_template('login.html', form=form)
     user = helpers.get_user()
-    return render_template('home.html', user=user, content=render_template('pages/dashboard.html'))
+    return render_template('home.html', content=render_template('pages/dashboard.html', user=user))
 
 
 @app.route("/logout")
@@ -102,9 +103,13 @@ def gen():
     """Video streaming generator function."""
     known_face_encodings = []
     known_face_names = []
+
+    user = helpers.get_user()
+    path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
+
     #Making encoding for known players
-    for filename in os.listdir(KNOWN_IMAGES_PATH):
-        image = face_recognition.load_image_file(os.path.join(KNOWN_IMAGES_PATH, filename))
+    for filename in os.listdir(path):
+        image = face_recognition.load_image_file(os.path.join(path_for_current_user, filename))
         known_face_encodings.append(face_recognition.face_encodings(image)[0])
 
         player_name = filename.split(".")[0]
@@ -229,6 +234,20 @@ def addmember():
     page_title = 'Add a member'
     page_description = 'Add a new face to your camera'
 
+    user = helpers.get_user()
+
+    #Configuring the upload folder
+    # define the name of the directory to be created
+    path = KNOWN_IMAGES_PATH + str(user.username) + "/"
+
+    try:
+        os.makedirs(path)
+    except OSError:
+        print ("Creation of the directory %s failed" % path)
+    else:
+        print ("Successfully created the directory %s" % path)
+    app.config['UPLOAD_FOLDER'] = path
+
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -248,6 +267,11 @@ def addmember():
 
     return render_template('home.html',
                             content=render_template( 'pages/addmember.html') )
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 
 @app.route('/removemember')
