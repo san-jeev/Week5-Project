@@ -5,6 +5,7 @@ bcrypt
 requests
 flask-heroku
 gunicorn
+cmake
 dlib
-opencv-python
 face_recognition
+opencv-python
