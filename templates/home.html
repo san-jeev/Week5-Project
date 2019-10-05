@@ -9,6 +9,9 @@
         </div>
 
         <br /><br />
+        <p class="title is-size-2 is-spaced">
+            Dashboard
+        </p>
 
         <aside class="menu has-text-white">
           <p class="menu-label">
@@ -27,21 +30,21 @@
           </p>
           <ul class="menu-list">
             <li><a href="{{ url_for('manageteam') }}">Manage Your Team</a></li>
-              <ul style="PADDING-LEFT: 10px">
-                <li><a href="{{ url_for('showemembers') }}">Show Existing Members</a></li>
+              <ul style="PADDING-LEFT: 30px">
+                <li><a href="{{ url_for('showmembers') }}">Show Existing Members</a></li>
                 <li><a href="{{ url_for('addmember') }}">Add a Member</a></li>
                 <li><a href="{{ url_for('removemember') }}">Remove a Member</a></li>
               </ul>
             <li><a href="{{ url_for('teamsettings') }}">Team Settings</a></li>
-            <li><a href="{{ url_for('status') }}">Check Status</a></li>
-            <li><a href="{{ url_for('admin-reports') }}">Check Reports</a></li>          </ul>
+            <li><a href="{{ url_for('status') }}">Check Camera Status</a></li>
+            <li><a href="{{ url_for('adminreports') }}">Admin Reports</a></li>          </ul>
           <p class="menu-label">
             Accounts
           </p>
           <ul class="menu-list">
             <li><a href="{{ url_for('transactions') }}">Transactions</a></li>
             <li><a href="{{ url_for('account') }}">Financial Accounting</a></li>
-            <li><a href="{{ url_for('fin-reports') }}">Financial Report</a></li>
+            <li><a href="{{ url_for('finreports') }}">Financial Report</a></li>
           </ul>
         </aside>
       </div>
