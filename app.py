@@ -85,7 +85,6 @@ def signup():
         return render_template('login.html', form=form)
     return redirect(url_for('login'))
 
-
 # -------- Settings ---------------------------------------------------------- #
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
@@ -202,6 +201,8 @@ def gen(user):
                 b'Content-Type: image/jpeg\r\n\r\n' + open('tmp/webcam_last_image.jpg', 'rb').read() + b'\r\n')
 
 # -------- Routing ---------------------------------------------------------- #
+
+# -------- Dashboard ---------------------------------------------------- #
 @app.route('/dashboard')
 def dashboard():
     # custommize your page title / description here
@@ -210,56 +211,62 @@ def dashboard():
 
     return redirect(url_for('login'))
 
+# -------- Insights ---------------------------------------------------- #
 @app.route('/insights')
 def insights():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Insights - Customize your cameras'
+    page_description = 'Page for insights'
 
     return render_template('home.html',
                             content=render_template( 'pages/insights.html') )
 
+# -------- List the Services Offered ---------------------------------------------------- #
 @app.route('/services')
 def services():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Services - Customize your cameras'
+    page_description = 'Page describes face recognition services offered'
 
     return render_template('home.html',
                             content=render_template( 'pages/services.html') )
 
+# -------- Give a Demo of the Services Offered ---------------------------------------------------- #
 @app.route('/demo')
 def demo():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Demo - Customize your cameras'
+    page_description = 'Page provides a demonstration of the face recognition service'
 
     return render_template('home.html',
                             content=render_template( 'pages/demo.html') )
 
+# -------- Show Prices for Services Offered ---------------------------------------------------- #
 @app.route('/pricing')
 def pricing():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Pricing - Customize your cameras'
+    page_description = 'Page shows pricing for the face recognition services'
 
     return render_template('home.html',
                             content=render_template( 'pages/pricing.html') )
 
+# -------- Show Company Contact Details ---------------------------------------------------- #
 @app.route('/contact')
 def contact():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Contact - Customize your cameras'
+    page_description = 'Page gives company contact information'
 
     return render_template('home.html',
                             content=render_template( 'pages/contact.html') )
 
+# -------- Manage Team Members ---------------------------------------------------- #
 @app.route('/manageteam')
 def manageteam():
     # custommize your page title / description here
-    page_title = 'Current status'
-    page_description = 'Check the current status of the cameras'
+    page_title = 'Manage Team'
+    page_description = 'Page allows you to manage the people for face recognition service'
 
     # try to match the pages defined in -> pages/
     return render_template('home.html',
@@ -268,8 +275,8 @@ def manageteam():
 @app.route('/showmembers')
 def showmembers():
     # custommize your page title / description here
-    page_title = 'Current status'
-    page_description = 'Check the current status of the cameras'
+    page_title = 'Show Members'
+    page_description = 'Page shows the face images or pictures of the members to be recognized'
 
     # try to match the pages defined in -> pages/
     return render_template('home.html',
@@ -280,7 +287,7 @@ def showmembers():
 def addmember():
     # custommize your page title / description here
     page_title = 'Add a member'
-    page_description = 'Add a new face to your camera'
+    page_description = 'Add a new member face image in the system'
 
     user = helpers.get_user()
 
@@ -320,63 +327,69 @@ def addmember():
 @app.route('/removemember')
 def removemember():
     # custommize your page title / description here
-    page_title = 'Current status'
-    page_description = 'Check the current status of the cameras'
+    page_title = 'Remove Member'
+    page_description = 'Remove a Member'
 
     # try to match the pages defined in -> pages/
     return render_template('home.html',
                             content=render_template( 'pages/removemember.html') )
 
+# -------- Team Setting ---------------------------------------------------- #
 @app.route('/teamsettings')
 def teamsettings():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Team Setup'
+    page_description = 'Setup a Team'
 
     return render_template('home.html',
                             content=render_template( 'pages/teamsettings.html') )
 
+# -------- Camera Status ---------------------------------------------------- #
 @app.route('/status')
-def ststus():
+def status():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Camera Status'
+    page_description = 'Show Camera Status'
 
     return render_template('home.html',
                             content=render_template( 'pages/status.html') )
 
+# -------- Admin Reports ---------------------------------------------------- #
 @app.route('/admimreports')
 def adminreports():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Admin Reports'
+    page_description = 'Provide Administration Reports'
 
     return render_template('home.html',
                             content=render_template( 'pages/adminreports.html') )
 
+# -------- Transactions ---------------------------------------------------- #
 @app.route('/transactions')
 def transactions():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Transactions'
+    page_description = 'Show Transactions'
 
     return render_template('home.html',
                             content=render_template( 'pages/transactions.html') )
 
+# -------- Account ---------------------------------------------------- #
 @app.route('/account')
 def account():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Account'
+    page_description = 'Provide Financial Accounting Details'
 
     return render_template('home.html',
                             content=render_template( 'pages/account.html') )
 
+# -------- Financial Reports ---------------------------------------------------- #
 @app.route('/finreports')
 def finreports():
     # custommize your page title / description here
-    page_title = 'Dashboard - Customize your cameras'
-    page_description = 'A controller for cameras'
+    page_title = 'Financial Reports'
+    page_description = 'Provide Financial Reports'
 
     return render_template('home.html',
                             content=render_template( 'pages/finreports.html') )
