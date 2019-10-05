@@ -17,29 +17,31 @@
           <ul class="menu-list">
             <li><a class="is-active" href="{{ url_for('dashboard') }}">Dashboard</a></li>
             <li><a href="{{ url_for('insights') }}">Insights</a></li>
+            <li><a href="{{ url_for('services') }}">Our Services</a></li>
+            <li><a href="{{ url_for('demo') }}">Demo</a></li>
+            <li><a href="{{ url_for('pricing') }}">Pricing</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
           </ul>
           <p class="menu-label">
             Administration
           </p>
           <ul class="menu-list">
-            <li><a href="{{ url_for('status') }}">Status</a></li>
-            <li><a href="{{ url_for('teamsettings') }}">Team Settings</a></li>
-            <li>
-              <p class="menu-label">
-                Manage your team
-              </p>
-              <ul>
-                <li><a href="{{ url_for('addmember') }}">Add a member</a></li>
-                <li><a href="{{ url_for('removemember') }}">Remove a member</a></li>
+            <li><a href="{{ url_for('manageteam') }}">Manage Your Team</a></li>
+              <ul style="PADDING-LEFT: 10px">
+                <li><a href="{{ url_for('showemembers') }}">Show Existing Members</a></li>
+                <li><a href="{{ url_for('addmember') }}">Add a Member</a></li>
+                <li><a href="{{ url_for('removemember') }}">Remove a Member</a></li>
               </ul>
-            </li>
-          </ul>
+            <li><a href="{{ url_for('teamsettings') }}">Team Settings</a></li>
+            <li><a href="{{ url_for('status') }}">Check Status</a></li>
+            <li><a href="{{ url_for('admin-reports') }}">Check Reports</a></li>          </ul>
           <p class="menu-label">
-            Account
+            Accounts
           </p>
           <ul class="menu-list">
-            <li><a href="{{ url_for('account') }}">Account</a></li>
             <li><a href="{{ url_for('transactions') }}">Transactions</a></li>
+            <li><a href="{{ url_for('account') }}">Financial Accounting</a></li>
+            <li><a href="{{ url_for('fin-reports') }}">Financial Report</a></li>
           </ul>
         </aside>
       </div>
