@@ -31,6 +31,12 @@ app.config['UPLOAD_FOLDER'] = KNOWN_IMAGES_PATH
 #heroku = Heroku(app)
 
 # Add the basic Stripe configuration
+STRIPE_PUBLISHABLE_KEY = 'pk_test_xW6EPmoOAtKvUwBzYZA68Q0Q00urdf6g1O'
+STRIPE_SECRET_KEY = 'sk_test_teP3S2mVubgQLPpSjXZEjlIy00FRWqogOm'
+
+os.environ['STRIPE_SECRET_KEY'] = STRIPE_SECRET_KEY
+os.environ['STRIPE_PUBLISHABLE_KEY'] = STRIPE_PUBLISHABLE_KEY
+
 stripe_keys = {
   'secret_key': os.environ['STRIPE_SECRET_KEY'],
   'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
@@ -112,6 +118,7 @@ def video_feed():
 def gen(user):
 
     """Video streaming generator function."""
+
     known_face_encodings = []
     known_face_names = []
 
@@ -199,6 +206,9 @@ def gen(user):
         cv2.imwrite('tmp/webcam_last_image.jpg', frame)
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('tmp/webcam_last_image.jpg', 'rb').read() + b'\r\n')
+
+    # video.release()
+    # cv2.destroyAllWindows()
 
 # -------- Routing ---------------------------------------------------------- #
 
@@ -413,4 +423,4 @@ def stripepay():
 
 # ======== Main ============================================================== #
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=True, threaded=True, use_reloader=True)
