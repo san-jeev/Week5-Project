@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block body %}
+{% include "navbar.html" %}
+
+<div class="dashboard">
+      <!-- left panel -->
+      <div class="dashboard-panel is-medium has-thick-padding has-background-grey-lighter is-hidden-mobile">
+        <div class="has-text-centered">
+          <!-- <img src="https://bulma.io/images/bulma-logo.png  " width="50%"> -->
+        </div>
+
+        <br /><br />
+        <p class="title is-size-2 is-spaced">
+            Dashboard
+        </p>
+
+        <aside class="menu has-text-white">
+          <p class="menu-label">
+            <b>General</b>
+          </p>
+          <ul class="menu-list">
+            <li><a class="is-active" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('insights') }}">Insights</a></li>
+            <li><a href="{{ url_for('services') }}">Our Services</a></li>
+            <li><a href="{{ url_for('demo') }}">Demo</a></li>
+            <li><a href="{{ url_for('pricing') }}">Pricing</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+          </ul>
+          <p class="menu-label">
+            <b>Administration</b>
+          </p>
+            <ul class="menu-list">
+              <li><a href="{{ url_for('manageteam') }}">Manage Your Team</a></li>
+                <ul style="PADDING-LEFT: 30px">
+                  <li><a href="{{ url_for('showmembers') }}">Show Existing Members</a></li>
+                  <li><a href="{{ url_for('addmember') }}">Add a Member</a></li>
+                  <li><a href="{{ url_for('removemember') }}">Remove a Member</a></li>
+                  <li><a href="{{ url_for('teamsettings') }}">Team Settings</a></li>
+                </ul>
+              <li><a href="{{ url_for('status') }}">Manage Webcam</a></li>
+              <li><a href="{{ url_for('adminreports') }}">Admin Reports</a></li>          </ul>
+              <p class="menu-label">
+                <b>Accounts</b>
+              </p>
+              <ul class="menu-list">
+                <li><a href="{{ url_for('transactions') }}">Transactions</a></li>
+                <li><a href="{{ url_for('account') }}">Financial Accounting</a></li>
+                <li><a href="{{ url_for('finreports') }}">Financial Reports</a></li>
+              </ul>
+        </aside>
+      </div>
+
+      <!-- main section -->
+      <div class="dashboard-main is-scrollable">
+        {{ content | safe }}
+
+        <!-- the footer will take up all unused space at the bottom -->
+        <!-- <footer class="footer has-background-black has-text-white">
+          <p class="is-size-2">
+            Footer
+          </p>
+
+          <p>
+            Notice that this entire space is filled up.
+          </p>
+        </footer> -->
+      </div>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script>
+  $(".menu a").click(function(){
+    $(".menu a").removeClass("is-active");
+    $(this).addClass("is-active");
+  });
+</script>
+
+<script src="../static/js/scripts.js"></script>
+{% endblock %}
