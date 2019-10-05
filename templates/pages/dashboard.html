@@ -2,7 +2,19 @@
 
   <p class="subtitle is-size-3">
     Welcome, {{ user.username | capitalize }} !!
-    <h1>Pay $25/month to try our monthly Face Recognition Subscription Service !!</h1>
+        <div>
+            <form action="/charge" method="post">
+              <script
+                src="https://checkout.stripe.com/checkout.js"
+                class="stripe-button"
+                data-key="{{ key }}"
+                data-description="A Flask Charge"
+                data-amount="2500"
+                data-locale="auto">
+              </script>
+            </form>
+              <h1>Pay $25/month to try our monthly Face Recognition Subscription Service !!</h1>
+        </div>
   </p>
 
   <hr />
