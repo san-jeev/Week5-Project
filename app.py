@@ -15,6 +15,7 @@ import cv2
 import numpy as np
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
+import time
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -152,6 +153,11 @@ def gen(user):
     if len(known_face_encodings) < 1:
         return
 
+    #Code for timeout
+    timeout_time = 10 #10 seconds
+    timeout = time.time() + timeout_time
+    passed_time = 0
+
     while True:
         rval, frame = video.read()
         # Resize frame of video to 1/4 size for faster face recognition processing
@@ -205,9 +211,14 @@ def gen(user):
             # # Display the resulting image
             # cv2.imshow('Video', frame)
 
-        # Hit 'q' on the keyboard to quit!
         #TODO: MAKE A BUTTON TO STOP RECORDING
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        # if cv2.waitKey(1) & 0xFF == ord('q'):
+        #     break
+        if time.time() > timeout - timeout_time + passed_time:
+            # Countdown
+            # print(timeout_time-passed_time)
+            passed_time += 1
+        if time.time() > timeout:
             break
 
         cv2.imwrite('tmp/webcam_last_image.jpg', frame)
