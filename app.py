@@ -9,6 +9,7 @@ import sys
 import os
 import stripe
 
+import pickle
 import face_recognition
 import cv2
 import numpy as np
@@ -124,17 +125,23 @@ def gen(user):
 
     path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
 
-    #Making encoding for known players
-    for filename in os.listdir(path_for_current_user):
-        print("path for current user", filename)
-        image = face_recognition.load_image_file(os.path.join(path_for_current_user, filename))
-        face_encoding = face_recognition.face_encodings(image)
-        if len(face_encoding)>0:
-            known_face_encodings.append(face_encoding[0])
-
-            player_name = filename.split(".")[0]
-            known_face_names.append(player_name)
-
+    picklefilename = "pickle_"+user.username
+    pickle_path = os.path.join(path_for_current_user, picklefilename)
+    if not(os.path.isfile(pickle_path)):
+        print("No images have been uploaded")
+        return
+    pickle_file = open(pickle_path, "rb")
+    while True:
+        try:
+            person_name, face_encoding = pickle.load(pickle_file)
+        except EOFError:
+            break
+        except:
+            break
+        known_face_encodings.append(face_encoding)
+        player_name = person_name.split(".")[0]
+        known_face_names.append(player_name)
+    pickle_file.close()
 
     # Initialize some variables
     face_locations = []
@@ -300,7 +307,6 @@ def addmember():
     page_description = 'Add a new member face image in the system'
 
     user = helpers.get_user()
-
     #Configuring the upload folder
     # define the name of the directory to be created
     path = KNOWN_IMAGES_PATH + str(user.username) + "/"
@@ -327,6 +333,16 @@ def addmember():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print("File saved")
+            image = face_recognition.load_image_file(os.path.join(path, filename))
+            face_encoding = face_recognition.face_encodings(image)
+            print("Encoded the image")
+            if len(face_encoding)>0:
+                picklefilename = "pickle_"+user.username
+                pickle_file = open(os.path.join(path, picklefilename), "ab")
+                pickle.dump([filename, face_encoding[0]], pickle_file)
+                pickle_file.close()
+            print("Dumped the file")
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
