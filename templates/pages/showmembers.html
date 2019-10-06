@@ -1,1 +1,40 @@
 
+<section class="section">
+  <p class="title is-size-2 is-spaced">
+    Team members
+  </p>
+
+  <p class="subtitle is-size-3">
+    See who all have joined your team.
+  </p>
+
+  <hr />
+
+  <section class="content is-medium">
+    <div class="columns is-multiline">
+    {% for image in images %}
+
+      <div class="column is-one-quarter-desktop is-half-tablet">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-3by2">
+              <img src="{{ url_for('static', filename=image) }}" alt="">
+            </figure>
+            <!-- <div class="card-content is-overlay is-clipped">
+              <span class="tag is-info">
+                Photo Title
+              </span>
+            </div> -->
+          </div>
+          <footer class="card-footer">
+              <a class="card-footer-item">
+                TEAM MEMBER
+              </a>
+          </footer>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+  </section>
+</section>

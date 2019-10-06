@@ -25,7 +25,8 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 #Create a video instance
 video = cv2.VideoCapture(0)
 #Path to known images (companys database)
-KNOWN_IMAGES_PATH = './known-faces/'
+KNOWN_IMAGES_PATH = './static/known-faces/'
+KNOWN_IMAGES_RELATIVE_PATH = './known-faces/'
 app.config['UPLOAD_FOLDER'] = KNOWN_IMAGES_PATH
 
 # Heroku
@@ -306,9 +307,17 @@ def showmembers():
     page_title = 'Show Members'
     page_description = 'Page shows the face images or pictures of the members to be recognized'
 
+    user = helpers.get_user()
+    path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
+    relative_path = KNOWN_IMAGES_RELATIVE_PATH + str(user.username) + "/"
+
+    images = []
+    for file in os.listdir(path_for_current_user):
+        if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith(".png") or file.endswith(".gif"):
+            images.append(os.path.join(relative_path, file))
     # try to match the pages defined in -> pages/
     return render_template('home.html',
-                            content=render_template( 'pages/showmembers.html') )
+                            content=render_template( 'pages/showmembers.html', images=images) )
 
 # -------- Add memeber ---------------------------------------------------- #
 @app.route('/addmember', methods=['GET', 'POST'])
