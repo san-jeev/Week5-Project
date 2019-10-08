@@ -28,6 +28,7 @@ video = cv2.VideoCapture(0)
 KNOWN_IMAGES_PATH = './static/known-faces/'
 KNOWN_IMAGES_RELATIVE_PATH = './known-faces/'
 app.config['UPLOAD_FOLDER'] = KNOWN_IMAGES_PATH
+CONTENT_PAGE = 'dashboard'
 
 # Heroku
 #from flask_heroku import Heroku
@@ -41,11 +42,20 @@ os.environ['STRIPE_SECRET_KEY'] = STRIPE_SECRET_KEY
 os.environ['STRIPE_PUBLISHABLE_KEY'] = STRIPE_PUBLISHABLE_KEY
 
 stripe_keys = {
-  'secret_key': os.environ['STRIPE_SECRET_KEY'],
-  'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
+    'secret_key': os.environ['STRIPE_SECRET_KEY'],
+    'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
 }
 
 stripe.api_key = stripe_keys['secret_key']
+
+
+# -------- Pricing Table  ------------------------------------------------------------- #
+
+# class Results(Table):
+#    id = Col('Id', show=False)
+#    serial_num = Col('#')
+#    discription = Col('Description')
+#    price = Col('Price')
 
 # ======== Routing =========================================================== #
 # -------- Login ------------------------------------------------------------- #
@@ -66,7 +76,6 @@ def login():
         return render_template('login.html', form=form)
     user = helpers.get_user()
     return render_template('home.html', content=render_template('pages/dashboard.html', user=user))
-
 
 @app.route("/logout")
 def logout():
@@ -121,11 +130,10 @@ def video_feed():
 def gen(user):
 
     """Video streaming generator function."""
-
     known_face_encodings = []
     known_face_names = []
 
-    path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
+
 
     picklefilename = "pickle_"+user.username
     pickle_path = os.path.join(path_for_current_user, picklefilename)
@@ -226,9 +234,6 @@ def gen(user):
         yield (b'--frame\r\n'
                 b'Content-Type: image/jpeg\r\n\r\n' + open('tmp/webcam_last_image.jpg', 'rb').read() + b'\r\n')
 
-    # video.release()
-    # cv2.destroyAllWindows()
-
 # -------- Routing ---------------------------------------------------------- #
 
 # -------- Dashboard ---------------------------------------------------- #
@@ -240,21 +245,11 @@ def dashboard():
 
     return redirect(url_for('login'))
 
-# -------- Insights ---------------------------------------------------- #
-@app.route('/insights')
-def insights():
-    # custommize your page title / description here
-    page_title = 'Insights - Customize your cameras'
-    page_description = 'Page for insights'
-
-    return render_template('home.html',
-                            content=render_template( 'pages/insights.html') )
-
 # -------- List the Services Offered ---------------------------------------------------- #
 @app.route('/services')
 def services():
-    # custommize your page title / description here
-    page_title = 'Services - Customize your cameras'
+    # customize your page title / description here
+    page_title = 'Services'
     page_description = 'Page describes face recognition services offered'
 
     return render_template('home.html',
@@ -264,7 +259,7 @@ def services():
 @app.route('/demo')
 def demo():
     # custommize your page title / description here
-    page_title = 'Demo - Customize your cameras'
+    page_title = 'Demo'
     page_description = 'Page provides a demonstration of the face recognition service'
 
     SAMPLE_IMAGES_PATH = "./static/sample_images/"
@@ -342,7 +337,7 @@ def demo():
 @app.route('/pricing')
 def pricing():
     # custommize your page title / description here
-    page_title = 'Pricing - Customize your cameras'
+    page_title = 'Pricing'
     page_description = 'Page shows pricing for the face recognition services'
 
     return render_template('home.html',
@@ -352,7 +347,7 @@ def pricing():
 @app.route('/contact')
 def contact():
     # custommize your page title / description here
-    page_title = 'Contact - Customize your cameras'
+    page_title = 'Contact'
     page_description = 'Page gives company contact information'
 
     return render_template('home.html',
@@ -527,4 +522,4 @@ def stripepay():
 
 # ======== Main ============================================================== #
 if __name__ == "__main__":
-    app.run(debug=True, threaded=True, use_reloader=True)
+    app.run(debug=True, use_reloader=True)
