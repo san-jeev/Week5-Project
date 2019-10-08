@@ -267,8 +267,76 @@ def demo():
     page_title = 'Demo - Customize your cameras'
     page_description = 'Page provides a demonstration of the face recognition service'
 
+    SAMPLE_IMAGES_PATH = "./static/sample_images/"
+    SAMPLE_IMAGES_RELATIVE_PATH = "./sample_images/"
+
+    #Just for the sake of demo files are hard coded
+    #There are 6 images
+    NUM_IMAGES = 6
+    filenames_images = ["federer.jpg","messi.jpg","nadal.jpg","ronaldo.jpg","obama.jpg","grassland.jpg"]
+    images=[SAMPLE_IMAGES_RELATIVE_PATH+x for x in filenames_images]
+
+    federer_image = face_recognition.load_image_file(os.path.join(SAMPLE_IMAGES_PATH, filenames_images[0]))
+    messi_image = face_recognition.load_image_file(os.path.join(SAMPLE_IMAGES_PATH, filenames_images[1]))
+    nadal_image = face_recognition.load_image_file(os.path.join(SAMPLE_IMAGES_PATH, filenames_images[2]))
+    ronaldo_image = face_recognition.load_image_file(os.path.join(SAMPLE_IMAGES_PATH, filenames_images[3]))
+    obama_image = face_recognition.load_image_file(os.path.join(SAMPLE_IMAGES_PATH, filenames_images[4]))
+    grassland_image = face_recognition.load_image_file(os.path.join(SAMPLE_IMAGES_PATH, filenames_images[5]))
+
+
+
+    results = [0]*NUM_IMAGES
+
+    #I am grabbing 0th index because I know that there exists one and only one face
+    federer_face_encoding = face_recognition.face_encodings(federer_image)[0]
+    messi_face_encoding = face_recognition.face_encodings(messi_image)[0]
+    nadal_face_encoding = face_recognition.face_encodings(nadal_image)[0]
+    ronaldo_face_encoding = face_recognition.face_encodings(ronaldo_image)[0]
+
+    known_faces = [
+        federer_face_encoding,
+        messi_face_encoding,
+        nadal_face_encoding,
+        ronaldo_face_encoding
+    ]
+    unknown_images = [
+        obama_image,
+        grassland_image
+    ]
+    known_names = [
+        "Federer",
+        "Messi",
+        "Nadal",
+        "Ronaldo"
+    ]
+    exists_in_db = ["YES","YES","YES","YES","NO","NO"]
+    # results is an array of True/False telling if the unknown face matched anyone in the known_faces array
+    for i in range(NUM_IMAGES):
+        #Compare with known_images first
+        if i<len(known_faces):
+            matches = face_recognition.compare_faces(known_faces, known_faces[i])
+            if True in matches:
+                results[i] = "Welcome, "+known_names[matches.index(True)]
+            else:
+                results[i] = "Unknown person. Contact your administrator."
+        else:
+            #We are checking the unknown images so first we have to encode them
+            img = face_recognition.face_encodings(unknown_images[i-len(known_faces)])
+            if img:
+                matches = face_recognition.compare_faces(known_faces, img[0])
+                if True in matches:
+                    results[i] = "Welcome, "+known_names[matches.index(True)]
+                else:
+                    results[i] = "Unknown person. Contact your administrator."
+            else:
+                results[i] = "No face detected in the image"
+
     return render_template('home.html',
-                            content=render_template( 'pages/demo.html') )
+                            content=render_template('pages/demo.html',
+                            num_rows=NUM_IMAGES,
+                            images=images,
+                            exists_in_db=exists_in_db,
+                            results=results))
 
 # -------- Show Prices for Services Offered ---------------------------------------------------- #
 @app.route('/pricing')

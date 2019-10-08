@@ -50,7 +50,7 @@
       </div>
 
       <!-- main section -->
-      <div class="dashboard-main is-scrollable">
+      <div class="dashboard-main">
         {{ content | safe }}
 
         <!-- the footer will take up all unused space at the bottom -->
@@ -71,6 +71,11 @@
   $(".menu a").click(function(){
     $(".menu a").removeClass("is-active");
     $(this).addClass("is-active");
+  });
+  $(".button").click(function(){
+    var button_id = $(this).attr('id');
+    var lastChar = button_id[button_id.length -1];
+    $('#results'+lastChar).css("display", "block");
   });
 </script>
 
