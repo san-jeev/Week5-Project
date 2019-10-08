@@ -1,1 +1,32 @@
+<doctype html>
+<title>Pricing Information</title>
 
+<section class="section">
+
+  <p class="subtitle is-size-3">
+        <div>
+            <br><br>
+            <b>PRICING</b>
+            <br><br>
+            $25/month for monthly subscription service
+            <br><br>
+            <b>PAYMENT</b>
+            <br><br>
+            <div>
+                <form action="/charge" method="post">
+                  <script
+                    src="https://checkout.stripe.com/checkout.js"
+                    class="stripe-button"
+                    data-key="{{ key }}"
+                    data-description="A Flask Charge"
+                    data-amount="2500"
+                    data-locale="auto">
+                  </script>
+                </form>
+                  <h1><BR>Pay $25/month to try our Face Recognition based Id. & Attendance Management Subscription Service !!</h1>
+            </div>
+
+        </div>
+  </p>
+
+</section>

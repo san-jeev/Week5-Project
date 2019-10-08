@@ -1,21 +1,13 @@
 <section class="section">
 
-  <p class="subtitle is-size-3">
-    Welcome, {{ user.username | capitalize }} !!
-        <div>
-            <form action="/charge" method="post">
-              <script
-                src="https://checkout.stripe.com/checkout.js"
-                class="stripe-button"
-                data-key="{{ key }}"
-                data-description="A Flask Charge"
-                data-amount="2500"
-                data-locale="auto">
-              </script>
-            </form>
-              <h1>Pay $25/month to try our monthly Face Recognition Subscription Service !!</h1>
-        </div>
-  </p>
+    <p class="subtitle is-size-3">
+        Welcome, {{ user.username | capitalize }} !!
+    </p>
+    <hr />
 
-  <hr />
+    <p>
+        <img src="{{url_for('static', filename='img/facerek-howto.png')}}" alt="FaceRek How To" width="1000" height="400">
+        <img src="{{url_for('static', filename='img/system-facerek.png')}}" alt="Biometric FaceRek" width="1000" height="350">
+    </p>
+
 </section>
