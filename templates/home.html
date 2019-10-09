@@ -4,108 +4,107 @@
 
 
     <div class="dashboard">
-          <!-- left panel -->
-          <div class="dashboard-panel is-medium has-thick-padding has-background-grey-lighter is-hidden-mobile">
-            <div class="has-text-centered">
-              <!-- <img src="https://bulma.io/images/bulma-logo.png  " width="50%"> -->
-            </div>
-            <br /><br />
-            <p class="title is-size-2 is-spaced">
-                Dashboard
-            </p>
-
-            <aside class="menu has-text-white">
-              <p class="menu-label">
-                <b>General</b>
-              </p>
-                <ul class="menu-list">
-                  <li><a {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('dashboard') }}">Dashboard</a></li>
-                  <li><a {% if CONTENT_PAGE=='services' %} class="is-active" {% endif %} href="{{ url_for('services') }}">Our Services</a></li>
-                  <li><a {% if CONTENT_PAGE=='demo' %} class="is-active" {% endif %} href="{{ url_for('demo') }}">Demo</a></li>
-                  <li><a {% if CONTENT_PAGE=='pricing' %} class="is-active" {% endif %} href="{{ url_for('pricing') }}">Pricing & Payment</a></li>
-                  <li><a {% if CONTENT_PAGE=='contact' %} class="is-active" {% endif %} href="{{ url_for('contact') }}">Contact Us</a></li>
-                </ul>
-              <p class="menu-label">
-                <b>Administration</b>
-              </p>
-                <ul class="menu-list">
-                  <li><a
-                    {% if CONTENT_PAGE=='manageteam' %} class="is-active" {% endif %}
-                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('manageteam') }}"
-                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                    {% endif %}">Manage Your Team</a></li>
-                  <ul style="PADDING-LEFT: 30px">
-                    <li><a
-                      {% if CONTENT_PAGE=='showmembers' %} class="is-active" {% endif %}
-                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('showmembers') }}"
-                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                      {% endif %}">Show Existing Members</a></li>
-                    <li><a
-                      {% if CONTENT_PAGE=='addmember' %} class="is-active" {% endif %}
-                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('addmember') }}"
-                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                      {% endif %}">Add a Member</a></li>
-                    <li><a
-                      {% if CONTENT_PAGE=='removemember' %} class="is-active" {% endif %}
-                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('removemember') }}"
-                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                      {% endif %}">Remove a Member</a></li>
-                    <li><a
-                      {% if CONTENT_PAGE=='teamsettings' %} class="is-active" {% endif %}
-                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('teamsettings') }}"
-                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                      {% endif %}">Team Settings</a></li>
-                  </ul>
-                  <li><a
-                    {% if CONTENT_PAGE=='status' %} class="is-active" {% endif %}
-                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('status') }}"
-                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                    {% endif %}">Webcam</a></li>
-                  <li><a
-                    {% if CONTENT_PAGE=='adminreports' %} class="is-active" {% endif %}
-                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('adminreports') }}"
-                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                    {% endif %}">Admin Reports</a></li>
-                </ul>
-              <p class="menu-label">
-                  <b>Accounts</b>
-              </p>
-                  <ul class="menu-list">
-                    <li><a
-                      {% if CONTENT_PAGE=='transactions' %} class="is-active" {% endif %}
-                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('transactions') }}"
-                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                      {% endif %}">Transactions</a></li>
-                    <li><a
-                      {% if CONTENT_PAGE=='account' %} class="is-active" {% endif %}
-                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('account') }}"
-                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                      {% endif %}">Financial Accounting</a></li>
-                    <li><a
-                      {% if CONTENT_PAGE=='finreports' %} class="is-active" {% endif %}
-                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('finreports') }}"
-                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                      {% endif %}">Financial Reports</a></li>
-                  </ul>
-            </aside>
+        <!-- left panel -->
+        <div class="dashboard-panel is-medium has-thick-padding has-background-grey-lighter is-hidden-mobile">
+          <div class="has-text-centered">
+            <!-- <img src="https://bulma.io/images/bulma-logo.png  " width="50%"> -->
           </div>
+          <br /><br />
+          <p class="title is-size-2 is-spaced">
+              Dashboard
+          </p>
+
+          <aside class="menu has-text-white">
+            <p class="menu-label">
+              <b>General</b>
+            </p>
+              <ul class="menu-list">
+                <li><a {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                <li><a {% if CONTENT_PAGE=='services' %} class="is-active" {% endif %} href="{{ url_for('services') }}">Our Services</a></li>
+                <li><a {% if CONTENT_PAGE=='demo' %} class="is-active" {% endif %} href="{{ url_for('demo') }}">Demo</a></li>
+                <li><a {% if CONTENT_PAGE=='pricing' %} class="is-active" {% endif %} href="{{ url_for('pricing') }}">Pricing & Payment</a></li>
+                <li><a {% if CONTENT_PAGE=='contact' %} class="is-active" {% endif %} href="{{ url_for('contact') }}">Contact Us</a></li>
+              </ul>
+            <p class="menu-label">
+              <b>Administration</b>
+            </p>
+            <ul class="menu-list">
+              <li><a
+                {% if CONTENT_PAGE=='manageteam' %} class="is-active" {% endif %}
+                {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('manageteam') }}"
+                {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                {% endif %}">Manage Your Team</a></li>
+              <ul style="PADDING-LEFT: 30px">
+                <li><a
+                  {% if CONTENT_PAGE=='showmembers' %} class="is-active" {% endif %}
+                  {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('showmembers') }}"
+                  {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                  {% endif %}">Show Existing Members</a></li>
+                <li><a
+                  {% if CONTENT_PAGE=='addmember' %} class="is-active" {% endif %}
+                  {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('addmember') }}"
+                  {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                  {% endif %}">Add a Member</a></li>
+                <li><a
+                  {% if CONTENT_PAGE=='removemember' %} class="is-active" {% endif %}
+                  {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('removemember') }}"
+                  {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                  {% endif %}">Remove a Member</a></li>
+                <li><a
+                  {% if CONTENT_PAGE=='teamsettings' %} class="is-active" {% endif %}
+                  {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('teamsettings') }}"
+                  {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                  {% endif %}">Team Settings</a></li>
+              </ul>
+                <li><a
+                  {% if CONTENT_PAGE=='status' %} class="is-active" {% endif %}
+                  {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('status') }}"
+                  {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                  {% endif %}">Webcam</a></li>
+                <li><a
+                  {% if CONTENT_PAGE=='adminreports' %} class="is-active" {% endif %}
+                  {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('adminreports') }}"
+                  {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                  {% endif %}">Admin Reports</a></li>
+              </ul>
+            <p class="menu-label">
+                <b>Accounts</b>
+            </p>
+                <ul class="menu-list">
+                  <li><a
+                    {% if CONTENT_PAGE=='transactions' %} class="is-active" {% endif %}
+                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('transactions') }}"
+                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                    {% endif %}">Transactions</a></li>
+                  <li><a
+                    {% if CONTENT_PAGE=='account' %} class="is-active" {% endif %}
+                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('account') }}"
+                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                    {% endif %}">Financial Accounting</a></li>
+                  <li><a
+                    {% if CONTENT_PAGE=='finreports' %} class="is-active" {% endif %}
+                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('finreports') }}"
+                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                    {% endif %}">Financial Reports</a></li>
+                </ul>
+          </aside>
+        </div>
 
 
-                    <!-- main section -->
-<!--             <div class="dashboard-main is-scrollable">  -->
-            <div>
-                {{ content | safe }}
-                <!-- the footer will take up all unused space at the bottom -->
-                <!-- <footer class="footer has-background-black has-text-white" -->
-                <!--  <p class="is-size-2">
-                    Footer
-                  </p> -->
+        <!-- main section -->
+        <div class="dashboard-main">
+            {{ content | safe }}
+            <!-- the footer will take up all unused space at the bottom -->
+            <!-- <footer class="footer has-background-black has-text-white" -->
+            <!--  <p class="is-size-2">
+                Footer
+              </p> -->
 
-                 <!-- <p>
-                    Notice that this entire space is filled up.
-                  </p>
-                </footer> -->
-            </div>
+             <!-- <p>
+                Notice that this entire space is filled up.
+              </p>
+            </footer> -->
+        </div>
     </div>
 
 {% endblock %}

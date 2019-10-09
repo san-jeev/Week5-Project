@@ -9,11 +9,13 @@ import sys
 import os
 import stripe
 
+import pickle
 import face_recognition
 import cv2
 import numpy as np
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
+import time
 import cfg
 
 app = Flask(__name__)
