@@ -300,18 +300,18 @@ def demo():
         if i<len(known_faces):
             matches = face_recognition.compare_faces(known_faces, known_faces[i])
             if True in matches:
-                results[i] = "Welcome, "+known_names[matches.index(True)] + "You have been successfully identified by the system as a Team Member"
+                results[i] = "Welcome, "+known_names[matches.index(True)] + "! You're successfully identified as a Team Member"
             else:
-                results[i] = "System has not identified you as a Team Member.....Please contact your Administrator."
+                results[i] = "System could not identify you as a Team Member...Please contact Admin"
         else:
             #We are checking the unknown images so first we have to encode them
             img = face_recognition.face_encodings(unknown_images[i-len(known_faces)])
             if img:
                 matches = face_recognition.compare_faces(known_faces, img[0])
                 if True in matches:
-                    results[i] = "Welcome, "+known_names[matches.index(True)] + "You have been successfully identified by the system as a Team Member"
+                    results[i] = "Welcome, "+known_names[matches.index(True)] + "! You're successfully identified as a Team Member"
                 else:
-                    results[i] = "System could not identify you as a Team Member...Please contact Admin"
+                    results[i] = "System did not identify you as Team Member. Pls contact Admin"
             else:
                 results[i] = "Not a valid Team Member Image....No face detected in this image"
 
@@ -527,7 +527,7 @@ def uploaded_file(filename):
 def charge():
 
     # amount in cents
-    amount = 2500
+    amount = 10000
 
     customer = stripe.Customer.create(
         email='sample@customer.com',
