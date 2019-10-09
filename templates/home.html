@@ -25,24 +25,24 @@
               <p class="menu-label">
                 <b>Administration</b>
               </p>
-                <ul class="menu-list" {% if PAYMENT_STRIPE_DONE=='true' %} style="pointer-events:auto;" {% else %} style="pointer-events:none;" {% endif %} >
-                  <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='manageteam' %} class="is-active" {% endif %} href="{{ url_for('manageteam') }}">Manage Your Team</a></li>
+                <ul class="menu-list" {% if PAYMENT_STRIPE_DONE=='true' %} style="pointer-events:none; color:lightgrey;" {% else %} style="pointer-events:none;" {% endif %} >
+                  <li><a {% if CONTENT_PAGE=='manageteam' %} class="is-active" {% endif %} href="{{ url_for('manageteam') }}">Manage Your Team</a></li>
                     <ul style="PADDING-LEFT: 30px">
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='showmembers' %} class="is-active" {% endif %} href="{{ url_for('showmembers') }}">Show Existing Members</a></li>
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='addmember' %} class="is-active" {% endif %} href="{{ url_for('addmember') }}">Add a Member</a></li>
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='removemember' %} class="is-active" {% endif %} href="{{ url_for('removemember') }}">Remove a Member</a></li>
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='teamsettings' %} class="is-active" {% endif %} href="{{ url_for('teamsettings') }}">Team Settings</a></li>
+                      <li><a {% if CONTENT_PAGE=='showmembers' %} class="is-active" {% endif %} href="{{ url_for('showmembers') }}">Show Existing Members</a></li>
+                      <li><a {% if CONTENT_PAGE=='addmember' %} class="is-active" {% endif %} href="{{ url_for('addmember') }}">Add a Member</a></li>
+                      <li><a {% if CONTENT_PAGE=='removemember' %} class="is-active" {% endif %} href="{{ url_for('removemember') }}">Remove a Member</a></li>
+                      <li><a {% if CONTENT_PAGE=='teamsettings' %} class="is-active" {% endif %} href="{{ url_for('teamsettings') }}">Team Settings</a></li>
                     </ul>
-                  <li><a style="color:lightgrey;" href="{{ url_for('status') }}">Manage Webcam</a></li>
-                  <li><a style="color:lightgrey;" href="{{ url_for('adminreports') }}">Admin Reports</a></li>
+                  <li><a href="{{ url_for('status') }}">Manage Webcam</a></li>
+                  <li><a href="{{ url_for('adminreports') }}">Admin Reports</a></li>
                 </ul>
               <p class="menu-label" style="pointer-events:none;">
                   <b>Accounts</b>
               </p>
-                  <ul class="menu-list" {% if PAYMENT_STRIPE_DONE=='false' %} style="pointer-events:none;" {% else %} style="pointer-events:auto;" {% endif %}>
-                    <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='transactions' %} class="is-active" {% endif %} href="{{ url_for('transactions') }}">Transactions</a></li>
-                    <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='account' %} class="is-active" {% endif %} href="{{ url_for('account') }}">Financial Accounting</a></li>
-                    <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='finreports' %} class="is-active" {% endif %} href="{{ url_for('finreports') }}">Financial Reports</a></li>
+                  <ul class="menu-list" {% if PAYMENT_STRIPE_DONE=='false' %} style="pointer-events:none; color:lightgrey;" {% else %} style="pointer-events:auto;" {% endif %}>
+                    <li><a {% if CONTENT_PAGE=='transactions' %} class="is-active" {% endif %} href="{{ url_for('transactions') }}">Transactions</a></li>
+                    <li><a {% if CONTENT_PAGE=='account' %} class="is-active" {% endif %} href="{{ url_for('account') }}">Financial Accounting</a></li>
+                    <li><a {% if CONTENT_PAGE=='finreports' %} class="is-active" {% endif %} href="{{ url_for('finreports') }}">Financial Reports</a></li>
                   </ul>
             </aside>
           </div>
