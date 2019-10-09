@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2>Thanks, you paid <strong>$25.00 for your monthly subscription</strong>!</h2>
+
+<section class="section">
+  <p class="subtitle is-size-3">
+        <div>
+          <br><br>
+          <b>PAYMENT DONE</b>
+          <br><br>
+          Thanks, you have successfully paid <strong>$ {{ amount/100 }} </strong> for your monthly subscription!<br><br>
+          Someone from our team will get in touch with you shortly.
+        </div>
+  </p>
+</section>
+
 {% endblock %}
