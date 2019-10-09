@@ -10,5 +10,31 @@
         Please select and click on one of the 6 images and note that the system recognizeS 4 existing team members and flags that other two.
         </div>
   </p>
-
+  <table class="table is-responsive">
+    <thead>
+      <!--TODO: Make it through in style.css -->
+      <tr>
+        <th style="text-align:center">Image</th>
+        <th style="text-align:center">In Database</th>
+        <th style="text-align:center">Test</th>
+        <th style="text-align:center">Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in range(num_rows) %}
+      <tr>
+        <td>
+          <figure class="image">
+            <img src="{{ url_for('static', filename=images[i]) }}" style="width:256px;" alt="">
+          </figure>
+        </td>
+        <td> {{ exists_in_db[i] }} </td>
+        <td>
+          <button class="button is-dark" id="button{{ i }}">Test</button>
+        </td>
+        <td id="results{{ i }}" style="display:none;">{{ results[i] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </section>
