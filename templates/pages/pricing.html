@@ -8,22 +8,65 @@
             <br><br>
             <b>PRICING</b>
             <br><br>
-            $25/month for monthly subscription service
-            <br><br>
+            <p>
+                 <img src="{{url_for('static', filename='img/pricing.png')}}" alt="FaceRek How To" width="1000" height="400">
+            </p>
+            <br>
             <b>PAYMENT</b>
             <br><br>
+
+    <!-- Display Stripe Pay button for payment processing -->
+
             <div>
+                <h2>Email us at facerek@gmail.com for <b>free trail</b> of Face Recognition based Id. & Attendance Management Subscription Service</h2>
+            </div>
+
+    <!--- Stripe Payment Button for $25/month SMBE-1 plan charge -->
+            <div>
+                <br><h2>Buy <b>$25/month SMBE-1</b> Face Recognition based Id. & Attendance Management Subscription Service</h2>
                 <form action="/charge" method="post">
                   <script
-                    src="https://checkout.stripe.com/checkout.js"
-                    class="stripe-button"
-                    data-key="{{ key }}"
-                    data-description="A Flask Charge"
-                    data-amount="2500"
-                    data-locale="auto">
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="{{ key }}"
+                        data-description="FaceRek Monthly SMBE-1 Subscription Charge"
+                        <!-- The charge amount is $25/month for SMBE-1 -->
+                        data-amount="2500"
+                        data-locale="auto">
                   </script>
                 </form>
-                  <h1><BR>Pay $25/month to try our Face Recognition based Id. & Attendance Management Subscription Service !!</h1>
+            </div>
+
+    <!--- Stripe Payment Button for $50/month SMBE-2 plan charge -->
+            <div>
+                <br><h2>Buy <b>$50/month SMBE-2</b> Face Recognition based Id. & Attendance Management Subscription Service</h2>
+                <form action="/charge" method="post">
+                  <script
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="{{ key }}"
+                        data-description="FaceRek Monthly SMBE-1 Subscription Charge"
+                        <!-- The charge amount is $50/month for SMBE-2 -->
+                        data-amount="5000"
+                        data-locale="auto">
+                  </script>
+                </form>
+            </div>
+
+    <!--- Stripe Payment Button for $100/month Enterprise plan charge -->
+            <div>
+                <br><h2>Buy <b>$100/month Enterprise</b> Face Recognition based Id. & Attendance Management Subscription Service</h2>
+                <form action="/charge" method="post">
+                  <script
+                        src="https://checkout.stripe.com/checkout.js"
+                        class="stripe-button"
+                        data-key="{{ key }}"
+                        data-description="FaceRek Monthly SMBE-1 Subscription Charge"
+                        <!-- The charge amount is $100/month for Enterprise -->
+                        data-amount="100000"
+                        data-locale="auto">
+                  </script>
+                </form>
             </div>
 
         </div>
