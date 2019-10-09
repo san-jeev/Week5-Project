@@ -8,22 +8,16 @@
             <br><br>
             <b>PRICING PLANS AND PAYMENT</b>
             <br><br>
-<!--            <p>  -->
-<!--                 <img src="{{url_for('static', filename='img/pricing.png')}}" alt="FaceRek How To" width="1000" height="400">  -->
-<!--            </p> -->
             <!-- Pricing Plans -->
             <div class="section" id="pricing" style="color: black; margin-top: -20px; border-bottom: 1px solid lightgrey;">
                 <div class="container">
-<!--                    <p style="text-align: center; font-size: 18px;">   -->
-<!--                        PRICING PLANS  -->
-<!--                    </p>  -->
-
                     <div class="item columns" style="margin-top: 20px;">
+
+                        <!-- Free Trail Plan -->
 
                         <div class="column is-3">
 
                             <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
-
                                 <nav class="level">
                                     <div class="level-item">
                                         <p style="text-align: center; font-weight: bold; color: #2d3436">FREE TRIAL PLAN</p>
@@ -44,7 +38,7 @@
                                     <br><br><br><br>
                                 </p>
 
-                                <nav class="level" style="margin-top: 20px;">
+                                <nav class="level" style="margin-top: 38px;">
                                     <div class="level-item">
                                         <div>
                                             <a href="{{ url_for('contact') }}">
@@ -62,7 +56,7 @@
                             </div>
                         </div>
 
-
+                        <!-- SMBE Plan -->
                         <div class="column is-3">
 
                             <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
@@ -100,15 +94,19 @@
                                                 data-key="{{ key }}"
                                                 data-description="FaceRek Monthly SMBE-1 Subscription Charge"
                                                 <!-- The charge amount is $100/month for SMBE plan -->
-                                                data-amount="2500"
+                                                data-amount="10000"
                                                 data-locale="auto">
                                             </script>
-                                        </form>
+                                        </form><br>
                                     </div>
                                 </nav>
+                                <p style="text-align: center; font-size: 12px; margin-top: -22px;">
+                                    Credit card required
+                                </p>
                             </div>
                         </div>
 
+                        <!-- Enterprise Plan -->
                         <div class="column is-3">
 
                             <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
@@ -152,6 +150,9 @@
                                         </form>
                                     </div>
                                 </nav>
+                                <p style="text-align: center; font-size: 12px; margin-top: -22px;">
+                                    Credit card required
+                                </p>
                             </div>
                         </div>
 
