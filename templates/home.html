@@ -28,24 +28,64 @@
               <p class="menu-label">
                 <b>Administration</b>
               </p>
-                <ul class="menu-list" {% if PAYMENT_STRIPE_DONE=='true' %} style="pointer-events:auto;" {% else %} style="pointer-events:none;" {% endif %} >
-                  <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('manageteam') }}">Manage Your Team</a></li>
-                    <ul style="PADDING-LEFT: 30px">
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('showmembers') }}">Show Existing Members</a></li>
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('addmember') }}">Add a Member</a></li>
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('removemember') }}">Remove a Member</a></li>
-                      <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('teamsettings') }}">Team Settings</a></li>
-                    </ul>
-                  <li><a style="color:lightgrey;" href="{{ url_for('status') }}">Manage Webcam</a></li>
-                  <li><a style="color:lightgrey;" href="{{ url_for('adminreports') }}">Admin Reports</a></li>
+                <ul class="menu-list">
+                  <li><a
+                    {% if CONTENT_PAGE=='manageteam' %} class="is-active" {% endif %}
+                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('manageteam') }}"
+                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                    {% endif %}">Manage Your Team</a></li>
+                  <ul style="PADDING-LEFT: 30px">
+                    <li><a
+                      {% if CONTENT_PAGE=='showmembers' %} class="is-active" {% endif %}
+                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('showmembers') }}"
+                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                      {% endif %}">Show Existing Members</a></li>
+                    <li><a
+                      {% if CONTENT_PAGE=='addmember' %} class="is-active" {% endif %}
+                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('addmember') }}"
+                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                      {% endif %}">Add a Member</a></li>
+                    <li><a
+                      {% if CONTENT_PAGE=='removemember' %} class="is-active" {% endif %}
+                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('removemember') }}"
+                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                      {% endif %}">Remove a Member</a></li>
+                    <li><a
+                      {% if CONTENT_PAGE=='teamsettings' %} class="is-active" {% endif %}
+                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('teamsettings') }}"
+                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                      {% endif %}">Team Settings</a></li>
+                  </ul>
+                  <li><a
+                    {% if CONTENT_PAGE=='status' %} class="is-active" {% endif %}
+                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('status') }}"
+                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                    {% endif %}">Webcam</a></li>
+                  <li><a
+                    {% if CONTENT_PAGE=='adminreports' %} class="is-active" {% endif %}
+                    {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('adminreports') }}"
+                    {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                    {% endif %}">Admin Reports</a></li>
                 </ul>
-              <p class="menu-label" style="pointer-events:none;">
+              <p class="menu-label">
                   <b>Accounts</b>
               </p>
-                  <ul class="menu-list" {% if PAYMENT_STRIPE_DONE=='false' %} style="pointer-events:none;" {% else %} style="pointer-events:auto;" {% endif %}>
-                    <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('transactions') }}">Transactions</a></li>
-                    <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('account') }}">Financial Accounting</a></li>
-                    <li><a style="color:lightgrey;" {% if CONTENT_PAGE=='dashboard' %} class="is-active" {% endif %} href="{{ url_for('finreports') }}">Financial Reports</a></li>
+                  <ul class="menu-list">
+                    <li><a
+                      {% if CONTENT_PAGE=='transactions' %} class="is-active" {% endif %}
+                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('transactions') }}"
+                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                      {% endif %}">Transactions</a></li>
+                    <li><a
+                      {% if CONTENT_PAGE=='account' %} class="is-active" {% endif %}
+                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('account') }}"
+                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                      {% endif %}">Financial Accounting</a></li>
+                    <li><a
+                      {% if CONTENT_PAGE=='finreports' %} class="is-active" {% endif %}
+                      {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('finreports') }}"
+                      {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                      {% endif %}">Financial Reports</a></li>
                   </ul>
             </aside>
           </div>

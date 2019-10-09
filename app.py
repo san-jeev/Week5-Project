@@ -14,6 +14,7 @@ import cv2
 import numpy as np
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
+import cfg
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)  # Generic key for dev purposes only
@@ -23,14 +24,10 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 #Create a video instance
 video = cv2.VideoCapture(0)
 
-# To keep track of menu page that the content customer wants to display
-CONTENT_PAGE = 'dashboard'
-
-#Payment variable to determine is customer payment is processed
-PAYMENT_STRIPE_DONE = 'false'
-
-# Path to known images (company's database)
-KNOWN_IMAGES_PATH = './known-faces/'
+#Path to known images (companys database)
+KNOWN_IMAGES_PATH = './static/known-faces/'
+KNOWN_IMAGES_RELATIVE_PATH = './known-faces/'
+app.config['UPLOAD_FOLDER'] = KNOWN_IMAGES_PATH
 
 # Heroku
 #from flask_heroku import Heroku
@@ -76,7 +73,7 @@ def login():
             return json.dumps({'status': 'Both fields required'})
         return render_template('login.html', form=form)
     user = helpers.get_user()
-    return render_template('home.html', content=render_template('pages/dashboard.html', user=user, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE))
+    return render_template('home.html', content=render_template('pages/dashboard.html', user=user, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE))
 
 @app.route("/logout")
 def logout():
@@ -132,16 +129,24 @@ def gen(user):
     known_face_encodings = []
     known_face_names = []
 
-    #Making encoding for known players
-    for filename in os.listdir(path_for_current_user):
-        print("path for current user", filename)
-        image = face_recognition.load_image_file(os.path.join(path_for_current_user, filename))
-        face_encoding = face_recognition.face_encodings(image)
-        if len(face_encoding)>0:
-            known_face_encodings.append(face_encoding[0])
-
-            player_name = filename.split(".")[0]
-            known_face_names.append(player_name)
+    path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
+    picklefilename = "pickle_"+user.username
+    pickle_path = os.path.join(path_for_current_user, picklefilename)
+    if not(os.path.isfile(pickle_path)):
+        print("No images have been uploaded")
+        return
+    pickle_file = open(pickle_path, "rb")
+    while True:
+        try:
+            person_name, face_encoding = pickle.load(pickle_file)
+        except EOFError:
+            break
+        except:
+            break
+        known_face_encodings.append(face_encoding)
+        player_name = person_name.split(".")[0]
+        known_face_names.append(player_name)
+    pickle_file.close()
 
     # Initialize some variables
     face_locations = []
@@ -151,6 +156,11 @@ def gen(user):
 
     if len(known_face_encodings) < 1:
         return
+
+    #Code for timeout
+    timeout_time = 10 #10 seconds
+    timeout = time.time() + timeout_time
+    passed_time = 0
 
     while True:
         rval, frame = video.read()
@@ -205,9 +215,14 @@ def gen(user):
             # # Display the resulting image
             # cv2.imshow('Video', frame)
 
-        # Hit 'q' on the keyboard to quit!
         #TODO: MAKE A BUTTON TO STOP RECORDING
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        # if cv2.waitKey(1) & 0xFF == ord('q'):
+        #     break
+        if time.time() > timeout - timeout_time + passed_time:
+            # Countdown
+            # print(timeout_time-passed_time)
+            passed_time += 1
+        if time.time() > timeout:
             break
 
         cv2.imwrite('tmp/webcam_last_image.jpg', frame)
@@ -223,8 +238,8 @@ def dashboard():
     page_title = 'Dashboard - Customize your cameras'
     page_description = 'A controller for cameras'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed #
-    CONTENT_PAGE = 'dashboard'
+     #
+    cfg.CONTENT_PAGE = 'dashboard'
 
     return redirect(url_for('login'))
 
@@ -235,11 +250,10 @@ def services():
     page_title = 'Services'
     page_description = 'Page describes face recognition services offered'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'services'
+    cfg.CONTENT_PAGE = 'services'
 
     return render_template('home.html',
-                            content=render_template( 'pages/services.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/services.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Give a Demo of the Services Offered ---------------------------------------------------- #
 @app.route('/demo')
@@ -250,8 +264,8 @@ def demo():
 
     SAMPLE_IMAGES_PATH = "./static/sample_images/"
     SAMPLE_IMAGES_RELATIVE_PATH = "./sample_images/"
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'demo'
+
+    cfg.CONTENT_PAGE = 'demo'
     #Just for the sake of demo files are hard coded
     #There are 6 images
     NUM_IMAGES = 6
@@ -318,7 +332,7 @@ def demo():
                             num_rows=NUM_IMAGES,
                             images=images,
                             exists_in_db=exists_in_db,
-                            results=results), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            results=results), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Show Prices for Services Offered ---------------------------------------------------- #
 @app.route('/pricing')
@@ -327,11 +341,11 @@ def pricing():
     page_title = 'Pricing'
     page_description = 'Page shows pricing for the face recognition services'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'pricing'
+
+    cfg.CONTENT_PAGE = 'pricing'
     # pass the stripe publishable key for stripe based credit card payment processing
     return render_template('home.html',
-                            content=render_template( 'pages/pricing.html', key=stripe_keys['publishable_key']), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/pricing.html', key=stripe_keys['publishable_key']), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Show Company Contact Details ---------------------------------------------------- #
 @app.route('/contact')
@@ -340,11 +354,11 @@ def contact():
     page_title = 'Contact'
     page_description = 'Page gives company contact information'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'contact'
+
+    cfg.CONTENT_PAGE = 'contact'
 
     return render_template('home.html',
-                            content=render_template('pages/contact.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template('pages/contact.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Manage Team Members ---------------------------------------------------- #
 @app.route('/manageteam')
@@ -353,36 +367,43 @@ def manageteam():
     page_title = 'Manage Team'
     page_description = 'Page allows you to manage the people for face recognition service'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'manageteam'
 
+    cfg.CONTENT_PAGE = 'manageteam'
+
+    print(cfg.PAYMENT_STRIPE_DONE)
     # try to match the pages defined in -> pages/
     return render_template('home.html',
-                            content=render_template( 'pages/manageteam.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/manageteam.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Show Team Members ---------------------------------------------------- #
 @app.route('/showmembers')
 def showmembers():
-    # Customize your page title / description here
+    # custommize your page title / description here
     page_title = 'Show Members'
     page_description = 'Page shows the face images or pictures of the members to be recognized'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'showmembers'
+    user = helpers.get_user()
+    path_for_current_user = KNOWN_IMAGES_PATH + str(user.username) + "/"
+    relative_path = KNOWN_IMAGES_RELATIVE_PATH + str(user.username) + "/"
 
+    images = []
+    for file in os.listdir(path_for_current_user):
+        if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith(".png") or file.endswith(".gif") or file.endswith(".JPG") or file.endswith(".JPEG") or file.endswith(".PNG") or file.endswith(".GIF"):
+            images.append(os.path.join(relative_path, file))
+
+    cfg.CONTENT_PAGE = 'showmembers'
     # try to match the pages defined in -> pages/
     return render_template('home.html',
-                            content=render_template( 'pages/showmembers.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/showmembers.html', images=images), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Add memeber ---------------------------------------------------- #
 @app.route('/addmember', methods=['GET', 'POST'])
 def addmember():
-    # Customize your page title / description here
+    # custommize your page title / description here
     page_title = 'Add a member'
     page_description = 'Add a new member face image in the system'
 
     user = helpers.get_user()
-
     #Configuring the upload folder
     # define the name of the directory to be created
     path = KNOWN_IMAGES_PATH + str(user.username) + "/"
@@ -409,14 +430,24 @@ def addmember():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            image = face_recognition.load_image_file(os.path.join(path, filename))
+            face_encoding = face_recognition.face_encodings(image)
+
+            if len(face_encoding)>0:
+                picklefilename = "pickle_"+user.username
+                pickle_file = open(os.path.join(path, picklefilename), "ab")
+                pickle.dump([filename, face_encoding[0]], pickle_file)
+                pickle_file.close()
+
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'addmember'
+
+    cfg.CONTENT_PAGE = 'addmember'
 
     return render_template('home.html',
-                            content=render_template( 'pages/addmember.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/addmember.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Remove memeber ---------------------------------------------------- #
 @app.route('/removemember')
@@ -425,12 +456,12 @@ def removemember():
     page_title = 'Remove Member'
     page_description = 'Remove a Member'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'removemember'
+
+    cfg.CONTENT_PAGE = 'removemember'
 
     # try to match the pages defined in -> pages/
     return render_template('home.html',
-                            content=render_template( 'pages/removemember.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/removemember.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Team Setting ---------------------------------------------------- #
 @app.route('/teamsettings')
@@ -439,11 +470,11 @@ def teamsettings():
     page_title = 'Team Setup'
     page_description = 'Setup a Team'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'teamsettings'
+
+    cfg.CONTENT_PAGE = 'teamsettings'
 
     return render_template('home.html',
-                            content=render_template( 'pages/teamsettings.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/teamsettings.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Camera Status ---------------------------------------------------- #
 @app.route('/status')
@@ -452,11 +483,11 @@ def status():
     page_title = 'Camera Status'
     page_description = 'Show Camera Status'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'status'
+
+    cfg.CONTENT_PAGE = 'status'
 
     return render_template('home.html',
-                            content=render_template( 'pages/status.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/status.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Admin Reports ---------------------------------------------------- #
 @app.route('/admimreports')
@@ -465,11 +496,11 @@ def adminreports():
     page_title = 'Admin Reports'
     page_description = 'Provide Administration Reports'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'adminreports'
+
+    cfg.CONTENT_PAGE = 'adminreports'
 
     return render_template('home.html',
-                            content=render_template( 'pages/adminreports.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/adminreports.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Transactions ---------------------------------------------------- #
 @app.route('/transactions')
@@ -478,11 +509,11 @@ def transactions():
     page_title = 'Transactions'
     page_description = 'Show Transactions'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'transactions'
+
+    cfg.CONTENT_PAGE = 'transactions'
 
     return render_template('home.html',
-                            content=render_template( 'pages/transactions.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/transactions.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Account ---------------------------------------------------- #
 @app.route('/account')
@@ -491,11 +522,11 @@ def account():
     page_title = 'Account'
     page_description = 'Provide Financial Accounting Details'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'account'
+
+    cfg.CONTENT_PAGE = 'account'
 
     return render_template('home.html',
-                            content=render_template( 'pages/account.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/account.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Financial Reports ---------------------------------------------------- #
 @app.route('/finreports')
@@ -504,11 +535,11 @@ def finreports():
     page_title = 'Financial Reports'
     page_description = 'Provide Financial Reports'
 
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'finereports'
+
+    cfg.CONTENT_PAGE = 'finereports'
 
     return render_template('home.html',
-                            content=render_template( 'pages/finreports.html'), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+                            content=render_template( 'pages/finreports.html'), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # -------- Upload images ---------------------------------------------------- #
 def allowed_file(filename):
@@ -538,11 +569,11 @@ def charge():
         currency='usd',
         description='Flask Charge'
     )
-    # Set CONTENT_PAGE variable to highlight the menu item corresponding to page displayed
-    CONTENT_PAGE = 'charge'
+
+    cfg.CONTENT_PAGE = 'charge'
     # Assign true to know that the customer's payment has been processed successfully
-    PAYMENT_STRIPE_DONE = 'true'
-    return render_template('home.html', content=render_template('charge.html', amount=amount), CONTENT_PAGE = CONTENT_PAGE, PAYMENT_STRIPE_DONE=PAYMENT_STRIPE_DONE)
+    cfg.PAYMENT_STRIPE_DONE = 'true'
+    return render_template('home.html', content=render_template('charge.html', amount=amount), CONTENT_PAGE = cfg.CONTENT_PAGE, PAYMENT_STRIPE_DONE=cfg.PAYMENT_STRIPE_DONE)
 
 # ======== Main ============================================================== #
 if __name__ == "__main__":
