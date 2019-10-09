@@ -4,8 +4,8 @@
   <nav class="navbar is-transparent">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-<!--        <img src="https://github.com/san-jeev/Week5-Project/tree/payments-feature/media/flaskex-logo.png" alt="Flaskex"> -->
-        <img src="https://github.com/anfederico/Flaskex/raw/master/media/flaskex-logo.png" alt="Flaskex">
+        <img src="{{url_for('static', filename='img/facerek-logo.png')}}" alt="FaceRek logo" >
+<!--        <img src="https://github.com/anfederico/Flaskex/raw/master/media/flaskex-logo.png" alt="Flaskex"> -->
         <h6 href="/" class="subtitle"><strong>FaceRek</strong></h6>
       </a>
       <div id="navbar-burger-id" class="navbar-burger burger" data-target="navbar-menu-id">
@@ -48,7 +48,9 @@
     </div>
   </nav>
 </section>
+
 <title>FaceRek</title>
+
 <section class="hero is-primary is-bold is-medium">
   <div class="hero-body">
     <div class="container has-text-centered">
@@ -57,18 +59,15 @@
           <br>
           <p><img src="{{url_for('static', filename='img/facescan1.jpg')}}" alt="FaceRek How To" width="200" height="100"></p>
           <p class="title is-2">FaceRek</p>
-          <p class="subtitle is-5"><i>Face Recogntion Technologies for Business Solutions</i></p>
-          <p class="subtitle is-4">&#x2022 Encrypted user authorization</p>
-          <p class="subtitle is-4">&#x2022 Face Recognition based Id & Attendance Mgmt.</p>
-          <p class="subtitle is-4">&#x2022 Pay as you go at $25 monthly subscription</p>
-          <p class="subtitle is-4">&#x2022 APIs to integrate with your BioMetric machine</p>
-    	  <p class="subtitle is-4">&#x2022 Make your cameras smart !!</p>
-    	  <p class="subtitle is-4">&#x2022 Our Pricing and subscription options: </p>
-          <p>
-              <img src="{{url_for('static', filename='img/pricing.png')}}" alt="FaceRek How To" width="800" height="30">
-          </p>
-    	  <p class="subtitle is-4">&#x2022 Contact us at facerek@gmail.com </p>
+          <p class="subtitle is-5"><i>Face Recognition Technologies for Business Solutions</i></p>
+          <p class="subtitle is-18">&#x2022 Encrypted user authorization</p>
+          <p class="subtitle is-8">&#x2022 Face Recognition based Id & Attendance Mgmt.</p>
+          <p class="subtitle is-8">&#x2022 Free trial & pay as you go monthly subscription</p>
+          <p class="subtitle is-8">&#x2022 APIs to integrate with your BioMetric machine</p>
+    	  <p class="subtitle is-8">&#x2022 Makes your cameras smart !!</p>
+    	  <p class="subtitle is-8">&#x2022 Contact us at facerek@gmail.com </p>
         </div>
+        <!-- Sign up and Sign-in --->
         <div class="column is-auto">
           <div id="signup-box" class="signup-box">
             <div class="signup-area">
@@ -118,7 +117,8 @@
     </div>
   </div>
 </section>
-<!-- Features -->
+
+<!-- FaceRek Features -->
 <div class="section" style="color: black; margin-top: 20px; border-bottom: 1px solid lightgrey;">
     <div class="container">
         <div class="item columns">
@@ -128,11 +128,11 @@
                 </p>
 
                 <p class="item-title" style="text-align: center; margin-top: 10px;">
-                    <span style="font-weight: bold;">Health monitoring</span>
+                    <span style="font-weight: bold;">End-to-end Encryption</span>
                 </p>
 
                 <p style="text-align: center; margin-top: 10px;">
-                    Monitor uptime of your website. Get instant alerts if anything breaks.
+                    Each Team Member and user's information is secure and encrypted end-to-end.
                 </p>
 
             </div>
@@ -143,11 +143,11 @@
                 </p>
 
                 <p class="item-title" style="text-align: center; margin-top: 10px;">
-                    <span style="font-weight: bold;">Latency</span>
+                    <span style="font-weight: bold;">Real Time Response</span>
                 </p>
 
                 <p style="text-align: center; margin-top: 10px;">
-                    Track the response time of your website.
+                    Fast and real-time face recognition based Identity and Attendance System.
                 </p>
             </div>
 
@@ -157,11 +157,11 @@
                 </p>
 
                 <p class="item-title" style="text-align: center; margin-top: 10px;">
-                    <span style="font-weight: bold;">Team</span>
+                    <span style="font-weight: bold;">API, SMS and Web Intergation</span>
                 </p>
 
                 <p style="text-align: center; margin-top: 10px;">
-                    Add your team members so they can keep track and get alerts.
+                    Easy API integration with 3rd-party Bio-Metric systems. Hooks for SMS & Web integration.
                 </p>
             </div>
 
@@ -172,11 +172,11 @@
                 </p>
 
                 <p class="item-title" style="text-align: center; margin-top: 10px;">
-                    <span style="font-weight: bold;">Ease of use</span>
+                    <span style="font-weight: bold;">Ease of Deploy and Use</span>
                 </p>
 
                 <p style="text-align: center; margin-top: 10px;">
-                    PingStack is beautiful and easy to use.
+                    FaceRek is cloud based Identity and Attendance Management System. It is easy to deoply and use.
                 </p>
             </div>
 
@@ -184,190 +184,160 @@
     </div>
 </div>
 
-<!-- Plans -->
-<div class="section" id="pricing" style="color: black; margin-top: -20px; border-bottom: 1px solid lightgrey;">
-    <div class="container">
-        <p style="text-align: center; font-size: 18px;">
-            PLANS
-        </p>
+<!-- FaceRek Pricing -->
 
-        <div class="item columns" style="margin-top: 20px;">
 
-            <div class="column is-3">
-
-                <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
-
-                    <nav class="level">
-                        <div class="level-item">
-                            <p style="text-align: center; font-weight: bold; color: #2d3436">FREE PLAN</p>
-                        </div>
-                    </nav>
-
-                    <nav class="level">
-
-                        <div class="level-item">
-                            <p style="text-align: center; font-size: 28px; font-weight: bold; color: #25c151">
-                                $0 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
-                            </p>
-                        </div>
-                    </nav>
-
+            <div class="section" id="pricing" style="color: black; margin-top: -20px; border-bottom: 1px solid lightgrey;">
+                <div class="container">
                     <p style="text-align: center; font-size: 18px;">
-                        5 monitors<br>
-                        1 users<br>
-                        Email alerts<br>
-                        <br>
+                       PRICING PLANS
                     </p>
+                    <!--     -->
+                    <!--     -->
+                    <div class="item columns" style="margin-top: 20px;">
 
-                    <nav class="level" style="margin-top: 20px;">
-                        <div class="level-item">
-                            <div>
-                                <a href="https://pingstack.io/app/register">
-                                    <button class="button" style="margin-top: 10px; background-color: #25c151; color: white; font-weight: bold; text-transform: uppercase;">
-                                        Start free trial
-                                    </button>
-                                </a>
+                        <div class="column is-3">
 
-                                <p style="text-align: center; font-size: 12px; margin-top: 5px;">
-                                    No credit card required
+                            <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
+
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-weight: bold; color: #2d3436">FREE TRIAL PLAN</p>
+                                    </div>
+                                </nav>
+
+                                <nav class="level">
+
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-size: 28px; font-weight: bold; color: #25c151">
+                                            $0 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
+                                        </p>
+                                    </div>
+                                </nav>
+
+                                <p style="text-align: center; font-size: 18px;">
+                                    Upto 3 Team Members<br>
+                                    <br><br><br><br><br>
                                 </p>
+
+                                <nav class="level" style="margin-top: 27px;">
+                                    <div class="level-item">
+                                        <div>
+                                            <a href="{{ url_for('contact') }}">
+                                                <button class="button" style="margin-top: 43px; background-color: #9d9dff; color: white; font-weight: bold; text-transform: uppercase;">
+                                                    Start free trial
+                                                </button>
+                                            </a>
+
+                                            <p style="text-align: center; font-size: 12px; margin-bottom: 0px;">
+                                                No credit card required
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nav>
                             </div>
                         </div>
-                    </nav>
-                </div>
-            </div>
 
-            <div class="column is-3">
 
-                <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
+                        <div class="column is-3">
 
-                    <nav class="level">
-                        <div class="level-item">
-                            <p style="text-align: center; font-weight: bold; color: #2d3436">STARTER PLAN</p>
-                        </div>
-                    </nav>
+                            <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-weight: bold; color: #2d3436;">SMBE PLAN</p>
+                                    </div>
+                                </nav>
 
-                    <nav class="level">
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-size: 28px; font-weight: bold;color: #25c151">
+                                            $100 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
+                                        </p>
+                                    </div>
+                                </nav>
 
-                        <div class="level-item">
-                            <p style="text-align: center; font-size: 28px; font-weight: bold; color: #25c151">
-                                $9 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
-                            </p>
-                        </div>
-                    </nav>
+                                <p style="text-align: center; font-size: 18px;">
+                                    Upto 100 Team Members<br>
+                                    API for Integration<br>
+                                    SMS Integration<br>
+                                    Webhook integration<br>
+                                    Includes Training<br>
+                                    Includes Support<br>
+                                    Includes AMC<br>
+                                 </p>
 
-                    <p style="text-align: center; font-size: 18px;">
-                        20 monitors<br>
-                        10 users<br>
-                        75 SMS credits<br>
-                        Webhook integration<br>
-                    </p>
+                                <nav class="level" style="margin-top: 0px;">
+                                    <div class="level-item">
+                                        <div>
+                                            <a href="{{ url_for('contact') }}">
+                                                <button class="button" style="margin-top: 43px; background-color: #9d9dff; color: white; font-weight: bold; text-transform: uppercase;">
+                                                    Sign-Up & Pay
+                                                </button>
+                                            </a>
 
-                    <nav class="level" style="margin-top: 20px;">
-                        <div class="level-item">
-                            <div>
-                                <a href="https://pingstack.io/app/register">
-                                    <button class="button" style="margin-top: 10px; background-color: #25c151; color: white; font-weight: bold; text-transform: uppercase;">
-                                        Start free trial
-                                    </button>
-                                </a>
+                                            <p style="text-align: center; font-size: 12px; margin-bottom: 0px;">
+                                                Credit card required
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nav>
 
-                                <p style="text-align: center; font-size: 12px; margin-top: 5px;">
-                                    No credit card required
-                                </p>
                             </div>
                         </div>
-                    </nav>
-                </div>
-            </div>
 
-            <div class="column is-3">
+                        <div class="column is-3">
 
-                <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
-                    <nav class="level">
-                        <div class="level-item">
-                            <p style="text-align: center; font-weight: bold; color: #2d3436;">PRO PLAN</p>
-                        </div>
-                    </nav>
+                            <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-weight: bold; color: #2d3436;">ENTERPRISE PLAN</p>
+                                    </div>
+                                </nav>
 
-                    <nav class="level">
-                        <div class="level-item">
-                            <p style="text-align: center; font-size: 28px; font-weight: bold;color: #25c151">
-                                $29 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
-                            </p>
-                        </div>
-                    </nav>
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-size: 28px; font-weight: bold; color: #25c151">
+                                            $250 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
+                                        </p>
+                                    </div>
+                                </nav>
 
-                    <p style="text-align: center; font-size: 18px;">
-                        50 monitors<br>
-                        20 users<br>
-                        200 SMS credits<br>
-                        Webhook integration<br>
-                    </p>
+                                <p style="text-align: center; font-size: 18px;">
+                                    Upto 1000 Team Members<br>
+                                    API for Integration<br>
+                                    SMS Integration<br>
+                                    Webhook integration<br>
+                                    Includes Training<br>
+                                    Includes Support<br>
+                                    Includes AMC<br>
+                                 </p>
 
-                    <nav class="level" style="margin-top: 20px;">
-                        <div class="level-item">
-                            <div>
-                                <a href="https://pingstack.io/app/register">
-                                    <button class="button" style="margin-top: 10px; background-color: #25c151; color: white; font-weight: bold; text-transform: uppercase;">
-                                        Start free trial
-                                    </button>
-                                </a>
+                                <nav class="level" style="margin-top: 0px;">
+                                    <div class="level-item">
+                                        <div>
+                                            <a href="{{ url_for('contact') }}">
+                                                <button class="button" style="margin-top: 43px; background-color: #9d9dff; color: white; font-weight: bold; text-transform: uppercase;">
+                                                    Sign-Up & Pay
+                                                </button>
+                                            </a>
 
-                                <p style="text-align: center; font-size: 12px; margin-top: 5px;">
-                                    No credit card required
-                                </p>
+                                            <p style="text-align: center; font-size: 12px; margin-bottom: 0px;">
+                                                Credit card required
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nav>
+
                             </div>
                         </div>
-                    </nav>
+
+                    </div>
                 </div>
             </div>
-
-            <div class="column is-3">
-
-                <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
-                    <nav class="level">
-                        <div class="level-item">
-                            <p style="text-align: center; font-weight: bold; color: #2d3436;">BUSINESS PLAN</p>
-                        </div>
-                    </nav>
-
-                    <nav class="level">
-                        <div class="level-item">
-                            <p style="text-align: center; font-size: 28px; font-weight: bold; color: #25c151">
-                                $49 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
-                            </p>
-                        </div>
-                    </nav>
-
-                    <p style="text-align: center; font-size: 18px;">
-                        100 monitors<br>
-                        30 users<br>
-                        300 SMS credits<br>
-                        Webhook integration<br>
-                    </p>
-
-                    <nav class="level" style="margin-top: 20px;">
-                        <div class="level-item">
-                            <div>
-                                <a href="https://pingstack.io/app/register">
-                                    <button class="button" style="margin-top: 10px; background-color: #25c151; color: white; font-weight: bold; text-transform: uppercase;">
-                                        Start free trial
-                                    </button>
-                                </a>
-
-                                <p style="text-align: center; font-size: 12px; margin-top: 5px;">
-                                    No credit card required
-                                </p>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
+
 <section class="hero">
   <footer class="footer">
     <div class="container">
