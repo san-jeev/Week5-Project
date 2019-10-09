@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
+
+<!-- Navigation Bar and Sign-in -->
 <section class="hero is-white is-medium">
   <nav class="navbar is-transparent">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
         <img src="{{url_for('static', filename='img/facerek-logo.png')}}" alt="FaceRek logo" >
-<!--        <img src="https://github.com/anfederico/Flaskex/raw/master/media/flaskex-logo.png" alt="Flaskex"> -->
         <h6 href="/" class="subtitle"><strong>FaceRek</strong></h6>
       </a>
       <div id="navbar-burger-id" class="navbar-burger burger" data-target="navbar-menu-id">
@@ -51,6 +52,7 @@
 
 <title>FaceRek</title>
 
+<!-- Middle Section with FaceRek info and sign-up -------->
 <section class="hero is-primary is-bold is-medium">
   <div class="hero-body">
     <div class="container has-text-centered">
@@ -60,14 +62,15 @@
           <p><img src="{{url_for('static', filename='img/facescan1.jpg')}}" alt="FaceRek How To" width="200" height="100"></p>
           <p class="title is-2">FaceRek</p>
           <p class="subtitle is-5"><i>Face Recognition Technologies for Business Solutions</i></p>
-          <p class="subtitle is-18">&#x2022 Encrypted user authorization</p>
+          <p class="subtitle is-8">&#x2022 Encrypted user authorization</p>
           <p class="subtitle is-8">&#x2022 Face Recognition based Id & Attendance Mgmt.</p>
           <p class="subtitle is-8">&#x2022 Free trial & pay as you go monthly subscription</p>
           <p class="subtitle is-8">&#x2022 APIs to integrate with your BioMetric machine</p>
     	  <p class="subtitle is-8">&#x2022 Makes your cameras smart !!</p>
     	  <p class="subtitle is-8">&#x2022 Contact us at facerek@gmail.com </p>
         </div>
-        <!-- Sign up and Sign-in --->
+
+        <!-- Sign up --->
         <div class="column is-auto">
           <div id="signup-box" class="signup-box">
             <div class="signup-area">
@@ -119,8 +122,12 @@
 </section>
 
 <!-- FaceRek Features -->
-<div class="section" style="color: black; margin-top: 20px; border-bottom: 1px solid lightgrey;">
+
+<div class="section" style="color: black; margin-top: 5px; border-bottom: 1px solid lightgrey;">
     <div class="container">
+        <p style="text-align: center; font-size: 18px;">
+            HIGHLIGHTS
+        </p>
         <div class="item columns">
             <div class="column is-3" style="border: 0px solid red;">
                 <p style="text-align: center; font-size: 35px;">
@@ -186,7 +193,6 @@
 
 <!-- FaceRek Pricing -->
 
-
             <div class="section" id="pricing" style="color: black; margin-top: -20px; border-bottom: 1px solid lightgrey;">
                 <div class="container">
                     <p style="text-align: center; font-size: 18px;">
@@ -195,6 +201,10 @@
                     <!--     -->
                     <!--     -->
                     <div class="item columns" style="margin-top: 20px;">
+
+                        <!--- Centering the pricing tables on the page -->
+                        <div class="column is-2">
+                        </div>
 
                         <div class="column is-3">
 
@@ -343,7 +353,7 @@
     <div class="container">
       <div class="content has-text-centered">
         <p>
-          <strong>FaceRek</strong> by Sanjeev | Himanshu Mittal
+          <strong>FaceRek</strong> by Sanjeev Gupta | Himanshu Mittal
           <span class="icon is-small">
             <i class="fa fa-copyright"></i>
           </span>2019
