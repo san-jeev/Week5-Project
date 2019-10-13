@@ -389,9 +389,10 @@ def showmembers():
     relative_path = KNOWN_IMAGES_RELATIVE_PATH + str(user.username) + "/"
 
     images = []
-    for file in os.listdir(path_for_current_user):
-        if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith(".png") or file.endswith(".gif") or file.endswith(".JPG") or file.endswith(".JPEG") or file.endswith(".PNG") or file.endswith(".GIF"):
-            images.append(os.path.join(relative_path, file))
+    if os.path.exists(path_for_current_user):
+        for file in os.listdir(path_for_current_user):
+            if file.endswith(".jpg") or file.endswith(".jpeg") or file.endswith(".png") or file.endswith(".gif") or file.endswith(".JPG") or file.endswith(".JPEG") or file.endswith(".PNG") or file.endswith(".GIF"):
+                images.append(os.path.join(relative_path, file))
 
     cfg.CONTENT_PAGE = 'showmembers'
     # try to match the pages defined in -> pages/
