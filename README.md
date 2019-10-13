@@ -11,7 +11,7 @@ Midterm: Himanshu Mittal and Sanjeev Gupta
 • Makes your cameras smart !!
 
 Sample Screen Shots of FaceRek:
-<img src="media/login.png" width=200>
-<img src="media/dashboard.png" width=200>
-<img src="media/demo.png" width=200>
-<img src="media/pricing-payment.png" width=200>
+<img src="./media/login.png" width=1000>
+<img src="./media/dashboard.png" width=1000>
+<img src="./media/demo.png" width=1000>
+<img src="./media/pricing-payment.png" width=1000>
