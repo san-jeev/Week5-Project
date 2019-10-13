@@ -7,12 +7,9 @@
         <!-- left panel -->
         <div class="dashboard-panel is-medium has-thick-padding has-background-grey-lighter is-hidden-mobile">
           <div class="has-text-centered">
-            <!-- <img src="https://bulma.io/images/bulma-logo.png  " width="50%"> -->
+            <img src="{{url_for('static', filename='img/facerek-logo.png')}}" width="50%">
           </div>
-          <br /><br />
-          <p class="title is-size-2 is-spaced">
-              Dashboard
-          </p>
+          <br />
 
           <aside class="menu has-text-white">
             <p class="menu-label">
@@ -112,7 +109,7 @@
 <script>
   $(".menu a").click(function(){
     $(".menu a").removeClass("is-active");
-<!--$(this).addClass("is-active"); -->
+    $(this).addClass("is-active");
   });
   $(".button").click(function(){
     var button_id = $(this).attr('id');

@@ -6,69 +6,159 @@
   <p class="subtitle is-size-3">
         <div>
             <br><br>
-            <b>PRICING</b>
+            <b>PRICING PLANS AND PAYMENT</b>
             <br><br>
-            <p>
-                 <img src="{{url_for('static', filename='img/pricing.png')}}" alt="FaceRek How To" width="1000" height="400">
-            </p>
-            <br>
-            <b>PAYMENT</b>
-            <br><br>
+            <!-- Pricing Plans -->
+            <div class="section" id="pricing" style="color: black; margin-top: -20px; border-bottom: 1px solid lightgrey;">
+                <div class="container">
+                    <div class="item columns" style="margin-top: 20px;">
 
-    <!-- Display Stripe Pay button for payment processing -->
+                        <!-- Free Trail Plan -->
 
-            <div>
-                <h2>Email us at facerek@gmail.com for <b>free trail</b> of Face Recognition based Id. & Attendance Management Subscription Service</h2>
+                        <div class="column is-3">
+
+                            <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-weight: bold; color: #2d3436">FREE TRIAL PLAN</p>
+                                    </div>
+                                </nav>
+
+                                <nav class="level">
+
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-size: 28px; font-weight: bold; color: #25c151">
+                                            $0 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
+                                        </p>
+                                    </div>
+                                </nav>
+
+                                <p style="text-align: center; font-size: 18px;">
+                                    Upto 3 Team Members<br>
+                                    <br><br><br><br>
+                                </p>
+
+                                <nav class="level" style="margin-top: 38px;">
+                                    <div class="level-item">
+                                        <div>
+                                            <a href="{{ url_for('contact') }}">
+                                                <button class="button" style="margin-top: 34px; background-color: #9d9dff; color: white; font-weight: bold; text-transform: uppercase;">
+                                                    Start free trial
+                                                </button>
+                                            </a>
+
+                                            <p style="text-align: center; font-size: 12px; margin-bottom: 0px;">
+                                                No credit card required
+                                            </p>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <!-- SMBE Plan -->
+                        <div class="column is-3">
+
+                            <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-weight: bold; color: #2d3436;">SMBE PLAN</p>
+                                    </div>
+                                </nav>
+
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-size: 28px; font-weight: bold;color: #25c151">
+                                            $100 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
+                                        </p>
+                                    </div>
+                                </nav>
+
+                                <p style="text-align: center; font-size: 18px;">
+                                    Upto 100 Team Members<br>
+                                    API for Integration<br>
+                                    SMS Integration<br>
+                                    Webhook integration<br>
+                                    Includes Training<br>
+                                    Includes Support<br>
+                                    Includes AMC<br>
+                                 </p>
+
+                                <nav class="level" style="margin-top: 20px;">
+                                    <div class="level-item">
+                                        <!--- Stripe Payment Button for $100/month SMBE plan charge -->
+                                        <form action="/charge" method="post">
+                                            <script
+                                                src="https://checkout.stripe.com/checkout.js"
+                                                class="stripe-button"
+                                                data-key="{{ key }}"
+                                                data-description="FaceRek Monthly SMBE-1 Subscription Charge"
+                                                <!-- The charge amount is $100/month for SMBE plan -->
+                                                data-amount="10000"
+                                                data-locale="auto">
+                                            </script>
+                                        </form><br>
+                                    </div>
+                                </nav>
+                                <p style="text-align: center; font-size: 12px; margin-top: -22px;">
+                                    Credit card required
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Enterprise Plan -->
+                        <div class="column is-3">
+
+                            <div style="padding: 10px 10px 10px 10px; border: 1px solid gray; border-radius: 5px;">
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-weight: bold; color: #2d3436;">ENTERPRISE PLAN</p>
+                                    </div>
+                                </nav>
+
+                                <nav class="level">
+                                    <div class="level-item">
+                                        <p style="text-align: center; font-size: 28px; font-weight: bold; color: #25c151">
+                                            $250 <span style="color: gray; font-weight: normal; font-size: 20px;">/month</span>
+                                        </p>
+                                    </div>
+                                </nav>
+
+                                <p style="text-align: center; font-size: 18px;">
+                                    Upto 1000 Team Members<br>
+                                    API for Integration<br>
+                                    SMS Integration<br>
+                                    Webhook integration<br>
+                                    Includes Training<br>
+                                    Includes Support<br>
+                                    Includes AMC<br>
+                                 </p>
+
+                                <nav class="level" style="margin-top: 20px;">
+                                    <div class="level-item">
+                                        <!--- Stripe Payment Button for $250/month Enterprise plan charge -->
+                                        <form action="/charge" method="post">
+                                            <script
+                                                src="https://checkout.stripe.com/checkout.js"
+                                                class="stripe-button"
+                                                data-key="{{ key }}"
+                                                data-description="FaceRek Monthly SMBE-1 Subscription Charge"
+                                                <!-- The charge amount is $250/month for Enterprise plan -->
+                                                data-amount="25000"
+                                                data-locale="auto">
+                                            </script>
+                                        </form>
+                                    </div>
+                                </nav>
+                                <p style="text-align: center; font-size: 12px; margin-top: -22px;">
+                                    Credit card required
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-
-    <!--- Stripe Payment Button for $25/month SMBE-1 plan charge -->
-            <div>
-                <br><h2>Buy <b>$25/month SMBE-1</b> Face Recognition based Id. & Attendance Management Subscription Service</h2>
-                <form action="/charge" method="post">
-                  <script
-                        src="https://checkout.stripe.com/checkout.js"
-                        class="stripe-button"
-                        data-key="{{ key }}"
-                        data-description="FaceRek Monthly SMBE-1 Subscription Charge"
-                        <!-- The charge amount is $25/month for SMBE-1 -->
-                        data-amount="2500"
-                        data-locale="auto">
-                  </script>
-                </form>
-            </div>
-
-    <!--- Stripe Payment Button for $50/month SMBE-2 plan charge -->
-            <div>
-                <br><h2>Buy <b>$50/month SMBE-2</b> Face Recognition based Id. & Attendance Management Subscription Service</h2>
-                <form action="/charge" method="post">
-                  <script
-                        src="https://checkout.stripe.com/checkout.js"
-                        class="stripe-button"
-                        data-key="{{ key }}"
-                        data-description="FaceRek Monthly SMBE-1 Subscription Charge"
-                        <!-- The charge amount is $50/month for SMBE-2 -->
-                        data-amount="5000"
-                        data-locale="auto">
-                  </script>
-                </form>
-            </div>
-
-    <!--- Stripe Payment Button for $100/month Enterprise plan charge -->
-            <div>
-                <br><h2>Buy <b>$100/month Enterprise</b> Face Recognition based Id. & Attendance Management Subscription Service</h2>
-                <form action="/charge" method="post">
-                  <script
-                        src="https://checkout.stripe.com/checkout.js"
-                        class="stripe-button"
-                        data-key="{{ key }}"
-                        data-description="FaceRek Monthly SMBE-1 Subscription Charge"
-                        <!-- The charge amount is $100/month for Enterprise -->
-                        data-amount="100000"
-                        data-locale="auto">
-                  </script>
-                </form>
-            </div>
-
         </div>
   </p>
 
