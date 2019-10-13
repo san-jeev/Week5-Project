@@ -26,11 +26,10 @@
               <b>Administration</b>
             </p>
             <ul class="menu-list">
-              <li><a
-                {% if CONTENT_PAGE=='manageteam' %} class="is-active" {% endif %}
-                {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('manageteam') }}"
-                {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                {% endif %}">Manage Your Team</a></li>
+              <li><a  
+		  {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('showmembers') }}"
+                  {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
+                  {% endif %}">Manage Your Team</a></li>
               <ul style="PADDING-LEFT: 30px">
                 <li><a
                   {% if CONTENT_PAGE=='showmembers' %} class="is-active" {% endif %}
@@ -57,7 +56,7 @@
                   {% if CONTENT_PAGE=='status' %} class="is-active" {% endif %}
                   {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('status') }}"
                   {% else %} style="pointer-events:none;color:lightgrey;cursor: default;"
-                  {% endif %}">Webcam</a></li>
+                  {% endif %}">Manage Webcam</a></li>
                 <li><a
                   {% if CONTENT_PAGE=='adminreports' %} class="is-active" {% endif %}
                   {% if PAYMENT_STRIPE_DONE=='true' %} href="{{ url_for('adminreports') }}"
