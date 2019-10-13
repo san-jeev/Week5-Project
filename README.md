@@ -5,7 +5,7 @@ Midterm: Himanshu Mittal and Sanjeev Gupta
 • Scalable cloud based system wih low cost of ownership<br>
 • Easy to deploy and use <br>
 • Encrypted user authorization and access control<br>
-• Free trial & pay online (stripe, paypal etc.) as you go monthly subscription for SMBE and Enterprise clients<br>
+• Free trial and pay-as-you-go monthly subscription (via Stripe or Paypal) offerings for SMBE or Enterprise clients<br>
 • Easy to integrate with your BioMetric machine via FaceRek API interface<br>
 • Webhooks and SMS integration<br>
 • Makes your cameras smart !!<br>
